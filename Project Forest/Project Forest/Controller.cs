@@ -18,6 +18,10 @@ namespace Project_Forest
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Level firstLevel;
+        MainCharacter playerCharacter;
+        Menu mainMenu;
+        Ent firstEnemy;
 
         public Controller()
             : base()
@@ -34,7 +38,10 @@ namespace Project_Forest
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            firstLevel = new Level();
+            playerCharacter = new MainCharacter();
+            mainMenu = new Menu();
+            firstEnemy = new Ent();
 
             base.Initialize();
         }
@@ -81,7 +88,7 @@ namespace Project_Forest
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.DarkGreen);
 
             // TODO: Add your drawing code here
 
