@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Project_Forest
 {
-    abstract class PowerUp : Entity
+    abstract class PowerUp : IEntity
     {
     }
 }

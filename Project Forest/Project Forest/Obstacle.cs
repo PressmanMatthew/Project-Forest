@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Project_Forest
 {
-    abstract class Obstacle : Entity
+    abstract class Obstacle : IEntity
     {
     }
 }

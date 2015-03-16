@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Project_Forest
 {
-    abstract class Movable : Entity
+    abstract class Movable : IEntity
     {
     }
 }

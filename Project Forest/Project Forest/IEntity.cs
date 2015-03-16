@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Project_Forest
 {
-    interface Entity
+    interface IEntity
     {
     }
 }
