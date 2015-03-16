@@ -49,7 +49,7 @@
     <Compile Include="Obstacle.cs" />
     <Compile Include="PowerUp.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Projectile.cs" />
+    <Compile Include="IProjectile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View.cs" />
   </ItemGroup>
