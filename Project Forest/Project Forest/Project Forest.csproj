@@ -40,6 +40,7 @@
     <Compile Include="Enemy.cs" />
     <Compile Include="Ent.cs" />
     <Compile Include="Controller.cs" />
+    <Compile Include="GameVariables.cs" />
     <Compile Include="GroundEnemy.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="Level.cs" />
