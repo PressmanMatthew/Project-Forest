@@ -39,9 +39,9 @@
     <Compile Include="Damaging.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Ent.cs" />
-    <Compile Include="Entity.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="GroundEnemy.cs" />
+    <Compile Include="IEntity.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="MainCharacter.cs" />
     <Compile Include="Menu.cs" />
