@@ -7,5 +7,6 @@ namespace Project_Forest
 {
     abstract class Obstacle : IEntity
     {
+
     }
 }
