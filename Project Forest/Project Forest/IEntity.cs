@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Drawing;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Project_Forest
 {
@@ -31,9 +32,9 @@ namespace Project_Forest
             get { return coRect; }
             set { coRect = value; }
         }
-        public bool IsColliding(IEntity i)
+        public bool IsColliding(IEntity entity)
         {
-            if(coRect.IntersectsWith(i.CoRect))
+            if(coRect.Intersects(entity.CoRect))
             {
                 return true;
             }
