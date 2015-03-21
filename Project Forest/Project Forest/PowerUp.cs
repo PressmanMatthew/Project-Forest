@@ -7,5 +7,12 @@ namespace Project_Forest
 {
     abstract class PowerUp : IEntity
     {
+        int power;
+
+        int Power
+        {
+            get { return power; }
+            set { power = value; }
+        }
     }
 }
