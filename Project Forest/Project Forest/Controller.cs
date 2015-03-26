@@ -18,10 +18,19 @@ namespace Project_Forest
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
         Level firstLevel;
+
         MainCharacter playerCharacter;
-        Menu mainMenu;
         Ent firstEnemy;
+
+        List<IEntity> entities;
+
+        View view;
+        Model model;
+        Menu mainMenu;
+
+        KeyboardState kbState;
 
         public Controller()
             : base()
@@ -40,8 +49,13 @@ namespace Project_Forest
         {
             firstLevel = new Level();
             playerCharacter = new MainCharacter();
-            mainMenu = new Menu();
             firstEnemy = new Ent();
+            entities = new List<IEntity>();
+            view = new View();
+            model = new Model();
+            mainMenu = new Menu();
+            
+            entities.Add(playerCharacter);
 
             base.Initialize();
         }
@@ -77,7 +91,9 @@ namespace Project_Forest
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            kbState = Keyboard.GetState();
+
+            //TODO: Add if statements for handling input
 
             base.Update(gameTime);
         }
@@ -90,7 +106,11 @@ namespace Project_Forest
         {
             GraphicsDevice.Clear(Color.DarkGreen);
 
-            // TODO: Add your drawing code here
+            spriteBatch.Begin();
+
+            view.Draw(spriteBatch, entities);
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
