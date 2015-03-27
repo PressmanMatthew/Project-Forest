@@ -21,9 +21,6 @@ namespace Project_Forest
             get { return active; }
             set { active = value; }
         }
-        public abstract void Move()
-        {
-
-        }
+        public abstract void Move();
     }
 }
