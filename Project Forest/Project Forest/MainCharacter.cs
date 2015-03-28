@@ -13,21 +13,17 @@ namespace Project_Forest
         //int fuel; for later use
         //int ammo;
         ChainSaw chainsaw;
-        Texture2D texture;
 
         public  int HP {get{return hp;} set{hp = value;}}
         public ChainSaw Chainsaw {get{return chainsaw;} set{chainsaw = value;}}
 
-        public Texture2D Texture {get{return texture;} set{texture = value;}}
-
-        public MainCharacter(int xpos, int ypos, Rectangle rect, int direct, int fast, int health, ChainSaw melee, Texture2D look):
-            base(xpos,ypos,rect,direct,fast)//Constructor base from movable
+        public MainCharacter(int xpos, int ypos, Rectangle rect, Texture2D texture, int direct, int fast, int health, ChainSaw melee):
+            base(xpos,ypos,rect, texture,direct,fast)//Constructor base from movable
         {
             hp = health;
             //fuel = gas;  for later use
             //ammo = munition;
             chainsaw = melee;
-            texture = look;
         }
 
         public override void Move()

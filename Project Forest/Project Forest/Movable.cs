@@ -16,6 +16,7 @@ namespace Project_Forest
         Texture2D texture;
         int direction;
         int speed;
+        protected CharacterStates state;
 
         public int X
         {
@@ -52,6 +53,12 @@ namespace Project_Forest
             set { speed = value; }
         }
 
+        public CharacterStates State
+        {
+            get { return state; }
+            set { state = value; }
+        }
+
         public Movable(int xpos, int ypos, Rectangle rect, Texture2D text, int direct, int fast)//Added constructor so that it can be base called in children
         {
             x = xpos;
@@ -60,6 +67,7 @@ namespace Project_Forest
             texture = text;
             direction = direct;
             speed = fast;
+            state = CharacterStates.FaceRight;
         }
 
         public abstract void Move();
