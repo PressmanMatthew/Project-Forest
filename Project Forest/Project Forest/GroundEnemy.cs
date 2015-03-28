@@ -7,9 +7,8 @@ namespace Project_Forest
 {
     abstract class GroundEnemy : Enemy
     {
-        public abstract void Move()
-        {
+        public abstract void Move();
 
-        }
+        public abstract void Attack();
     }
 }
