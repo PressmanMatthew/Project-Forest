@@ -59,14 +59,14 @@ namespace Project_Forest
             set { state = value; }
         }
 
-        public Movable(int xpos, int ypos, Rectangle rect, Texture2D text, int direct, int fast)//Added constructor so that it can be base called in children
+        public Movable(int xpos, int ypos, Rectangle rect, Texture2D text, int direct, int speed)//Added constructor so that it can be base called in children
         {
             x = xpos;
             y = ypos;
             coRect = rect;
             texture = text;
             direction = direct;
-            speed = fast;
+            this.speed = speed;
             state = CharacterStates.FaceRight;
         }
 

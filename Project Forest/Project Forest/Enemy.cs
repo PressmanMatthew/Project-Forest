@@ -10,27 +10,30 @@ namespace Project_Forest
     abstract class Enemy : Movable
     {
         int hp;
-        Texture2D texture;
-        Rectangle agroRect;
+        Rectangle atkRanRect;
 
-        int Hp
+        public int HP
         {
             get { return hp; }
             set { hp = value; }
         }
 
-        Texture2D Texture
+        public Rectangle AtkRanRect
         {
-            get { return texture; }
-            set { texture = value; }
+            get { return atkRanRect; }
+            set { atkRanRect = value; }
         }
 
-        Rectangle AgroRect
+        public Enemy(int xpos, int ypos, Rectangle rect, Texture2D text, int direct, int speed, int health, Rectangle range)
+            :base(xpos,ypos,rect,text,direct,speed)
         {
-            get { return AgroRect; }
-            set { AgroRect = value; }
+            hp = health;
+            atkRanRect = range;
         }
         public override abstract void Move();
-        public abstract void Attack();
+
+        public abstract void Move(MainCharacter player);
+
+        public abstract void Attack(MainCharacter player);
     }
 }
