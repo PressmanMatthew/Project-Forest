@@ -18,10 +18,23 @@ namespace Project_Forest
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
         Level firstLevel;
+
         MainCharacter playerCharacter;
-        Menu mainMenu;
         Ent firstEnemy;
+
+        ChainSaw chain;
+
+        List<IEntity> entities;
+
+        View view;
+        Model model;
+        Menu mainMenu;
+
+        KeyboardState kbState;
+        Texture2D entTexture;
+        Texture2D mainTexture;
 
         public Controller()
             : base()
@@ -39,9 +52,12 @@ namespace Project_Forest
         protected override void Initialize()
         {
             firstLevel = new Level();
-            playerCharacter = new MainCharacter();
-            mainMenu = new Menu();
             firstEnemy = new Ent();
+            chain = new ChainSaw();
+            entities = new List<IEntity>();
+            view = new View();
+            model = new Model();
+            mainMenu = new Menu();
 
             base.Initialize();
         }
@@ -55,7 +71,12 @@ namespace Project_Forest
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            mainTexture = this.Content.Load<Texture2D>("Main Character");
+
+            playerCharacter = new MainCharacter((GraphicsDevice.Viewport.Width / 3) * 2, GraphicsDevice.Viewport.Height / 6,
+                new Rectangle((GraphicsDevice.Viewport.Width / 3) * 2, GraphicsDevice.Viewport.Height / 6, 50, 100), mainTexture, 1, 5, 100, chain);
+
+            entities.Add(playerCharacter);
         }
 
         /// <summary>
@@ -77,7 +98,50 @@ namespace Project_Forest
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            kbState = Keyboard.GetState();
+
+            if (view.State == ViewStates.Stationary)
+            {
+                switch (playerCharacter.State)
+                {
+                    case CharacterStates.FaceRight:
+                        if (kbState.IsKeyDown(Keys.Right))
+                        {
+                            playerCharacter.State = CharacterStates.WalkRight;
+                        }
+                        if (kbState.IsKeyDown(Keys.Left))
+                        {
+                            playerCharacter.State = CharacterStates.WalkLeft;
+                        }
+                        break;
+                    case CharacterStates.FaceLeft:
+                        if (kbState.IsKeyDown(Keys.Right))
+                        {
+                            playerCharacter.State = CharacterStates.WalkRight;
+                        }
+                        if (kbState.IsKeyDown(Keys.Left))
+                        {
+                            playerCharacter.State = CharacterStates.WalkLeft;
+                        }
+                        break;
+                    case CharacterStates.WalkRight:
+                        playerCharacter.X += playerCharacter.Speed;
+                        if (kbState.IsKeyUp(Keys.Right))
+                        {
+                            playerCharacter.State = CharacterStates.FaceRight;
+                        }
+                        break;
+                    case CharacterStates.WalkLeft:
+                        playerCharacter.X -= playerCharacter.Speed;
+                        if (kbState.IsKeyUp(Keys.Left))
+                        {
+                            playerCharacter.State = CharacterStates.FaceLeft;
+                        }
+                        break;
+                    case CharacterStates.MeleeAttack:
+                        break;
+                }
+            }
 
             base.Update(gameTime);
         }
@@ -90,7 +154,11 @@ namespace Project_Forest
         {
             GraphicsDevice.Clear(Color.DarkGreen);
 
-            // TODO: Add your drawing code here
+            spriteBatch.Begin();
+
+            view.Draw(spriteBatch, entities);
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

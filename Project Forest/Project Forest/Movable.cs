@@ -13,8 +13,10 @@ namespace Project_Forest
         int x;
         int y;
         Rectangle coRect;
+        Texture2D texture;
         int direction;
         int speed;
+        protected CharacterStates state;
 
         public int X
         {
@@ -33,6 +35,12 @@ namespace Project_Forest
             set { coRect = value; }
         }
 
+        public Texture2D Texture
+        {
+            get { return texture; }
+            set { texture = value; }
+        }
+
         public int Direction
         {
             get { return direction; }
@@ -45,13 +53,21 @@ namespace Project_Forest
             set { speed = value; }
         }
 
-        public Movable(int xpos, int ypos, Rectangle rect, int direct, int fast)//Added constructor so that it can be base called in children
+        public CharacterStates State
+        {
+            get { return state; }
+            set { state = value; }
+        }
+
+        public Movable(int xpos, int ypos, Rectangle rect, Texture2D text, int direct, int fast)//Added constructor so that it can be base called in children
         {
             x = xpos;
             y = ypos;
             coRect = rect;
+            texture = text;
             direction = direct;
             speed = fast;
+            state = CharacterStates.FaceRight;
         }
 
         public abstract void Move();

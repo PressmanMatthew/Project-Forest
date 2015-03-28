@@ -30,7 +30,7 @@ namespace Project_Forest
             get { return AgroRect; }
             set { AgroRect = value; }
         }
-        public abstract void Move();
+        public override abstract void Move();
         public abstract void Attack();
     }
 }
