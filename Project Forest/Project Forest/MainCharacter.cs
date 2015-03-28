@@ -17,8 +17,8 @@ namespace Project_Forest
         public  int HP {get{return hp;} set{hp = value;}}
         public ChainSaw Chainsaw {get{return chainsaw;} set{chainsaw = value;}}
 
-        public MainCharacter(int xpos, int ypos, Rectangle rect, Texture2D texture, int direct, int fast, int health, ChainSaw melee):
-            base(xpos,ypos,rect, texture,direct,fast)//Constructor base from movable
+        public MainCharacter(int xpos, int ypos, Rectangle rect, Texture2D texture, int direct, int speed, int health, ChainSaw melee):
+            base(xpos,ypos,rect, texture,direct,speed)//Constructor base from movable
         {
             hp = health;
             //fuel = gas;  for later use

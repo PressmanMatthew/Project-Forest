@@ -95,6 +95,8 @@ namespace Project_Forest
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            playerCharacter.Speed = gameTime.ElapsedGameTime.Milliseconds / 3;
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
@@ -141,7 +143,40 @@ namespace Project_Forest
                     case CharacterStates.MeleeAttack:
                         break;
                 }
+                switch (firstEnemy.State)
+                {
+                    case CharacterStates.FaceRight:
+                        if (playerCharacter.X > firstEnemy.X)
+                        {
+                            firstEnemy.State = CharacterStates.WalkRight;
+                        }
+                        if (playerCharacter.X < firstEnemy.X)
+                        {
+                            firstEnemy.State = CharacterStates.WalkLeft;
+                        }
+                        break;
+                    case CharacterStates.FaceLeft:
+                        if (playerCharacter.X > firstEnemy.X)
+                        {
+                            firstEnemy.State = CharacterStates.WalkRight;
+                        }
+                        if (playerCharacter.X < firstEnemy.X)
+                        {
+                            firstEnemy.State = CharacterStates.WalkLeft;
+                        }
+                        break;
+                    case CharacterStates.WalkRight:
+                        break;
+                    case CharacterStates.WalkLeft:
+                        break;
+                    case CharacterStates.MeleeAttack:
+                        break;
+                }
             }
+
+            entities.Clear();
+            entities.Add(playerCharacter);
+            entities.Add(firstEnemy);
 
             base.Update(gameTime);
         }
