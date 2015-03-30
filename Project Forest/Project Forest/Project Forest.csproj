@@ -40,6 +40,7 @@
     <Compile Include="Enemy.cs" />
     <Compile Include="Ent.cs" />
     <Compile Include="Controller.cs" />
+    <Compile Include="Enumerators.cs" />
     <Compile Include="GameVariables.cs" />
     <Compile Include="GroundEnemy.cs" />
     <Compile Include="IEntity.cs" />
@@ -63,11 +64,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Ent 200.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Main Character.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icon.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
