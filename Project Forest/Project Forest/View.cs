@@ -51,5 +51,15 @@ namespace Project_Forest
                 }
             }
         }
+
+        public void DrawMenu(SpriteBatch sb, GameStates gState, Menu cMenu)
+        {
+            //if state is in menu state
+            if (gState == GameStates.Menu)
+            {
+
+                sb.Draw(cMenu.getsetImage, new Rectangle(0, 0, cMenu.getsetImage.Width, cMenu.getsetImage.Height), Color.White);
+            }
+        }
     }
 }

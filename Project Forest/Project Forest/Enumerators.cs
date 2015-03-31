@@ -19,4 +19,17 @@ namespace Project_Forest
         Stationary, 
         Moving,
     }
+
+    enum GameStates
+    {
+        Menu,
+        Game,
+    }
+
+    enum MenuStates
+    {
+        MainMenu,
+        Controls,
+        Credits,
+    }
 }
