@@ -33,8 +33,26 @@ namespace Project_Forest
         Menu mainMenu;
 
         KeyboardState kbState;
+
         Texture2D entTexture;
         Texture2D mainTexture;
+        Texture2D chainTexture;
+        Texture2D groundTexture;
+
+        int mainCharacterStartingX;
+        int mainCharacterStartingY;
+        Rectangle mainCharacterStartingRect;
+
+        int firstEnemyStartingX;
+        int firstEnemyStartingY;
+        Rectangle firstEnemyStartingRect;
+        Rectangle firstEnemyAttackRangeRect;
+        Rectangle chainRect;
+        Rectangle localEnemyAttackRanRect;
+
+        bool startedAttacking;
+        int startingAttackTime;
+        bool gameOver;
 
         public Controller()
             : base()
@@ -51,13 +69,24 @@ namespace Project_Forest
         /// </summary>
         protected override void Initialize()
         {
+            mainCharacterStartingX = (GraphicsDevice.Viewport.Width / 3);
+            mainCharacterStartingY = (GraphicsDevice.Viewport.Height / 6) * 3;
+            mainCharacterStartingRect = new Rectangle(mainCharacterStartingX, mainCharacterStartingY, 50, 100);
+
+            firstEnemyStartingX = ((GraphicsDevice.Viewport.Width / 3) * 2 + 50);
+            firstEnemyStartingY = (GraphicsDevice.Viewport.Height / 6) * 3;
+            firstEnemyStartingRect = new Rectangle(firstEnemyStartingX, firstEnemyStartingY, 120, 70);
+            chainRect = new Rectangle(mainCharacterStartingX + 30, mainCharacterStartingY + 40, 50, 25);
+            firstEnemyAttackRangeRect = new Rectangle(firstEnemyStartingX - 10, firstEnemyStartingY - 10, firstEnemyStartingRect.Width + 20, firstEnemyStartingRect.Height + 20);
+            localEnemyAttackRanRect = firstEnemyAttackRangeRect;
             firstLevel = new Level();
-            firstEnemy = new Ent();
-            chain = new ChainSaw();
             entities = new List<IEntity>();
             view = new View();
             model = new Model();
             mainMenu = new Menu();
+
+            startedAttacking = false;
+            gameOver = false;
 
             base.Initialize();
         }
@@ -72,9 +101,13 @@ namespace Project_Forest
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             mainTexture = this.Content.Load<Texture2D>("Main Character");
+            entTexture = this.Content.Load<Texture2D>("Ent 200");
+            chainTexture = this.Content.Load<Texture2D>("ChainSaw");
+            groundTexture = this.Content.Load<Texture2D>("Ground");
 
-            playerCharacter = new MainCharacter((GraphicsDevice.Viewport.Width / 3) * 2, GraphicsDevice.Viewport.Height / 6,
-                new Rectangle((GraphicsDevice.Viewport.Width / 3) * 2, GraphicsDevice.Viewport.Height / 6, 50, 100), mainTexture, 1, 5, 100, chain);
+            playerCharacter = new MainCharacter(mainCharacterStartingX, mainCharacterStartingY, mainCharacterStartingRect, mainTexture, 1, 10, 100, chain);
+            firstEnemy = new Ent(firstEnemyStartingX, firstEnemyStartingY, firstEnemyStartingRect, entTexture, 1, 5, 100, firstEnemyAttackRangeRect);
+            chain = new ChainSaw(mainCharacterStartingX, mainCharacterStartingY, chainRect, chainTexture, 0, 2, 50);
 
             entities.Add(playerCharacter);
         }
@@ -146,31 +179,72 @@ namespace Project_Forest
                 switch (firstEnemy.State)
                 {
                     case CharacterStates.FaceRight:
-                        if (playerCharacter.X > firstEnemy.X)
+                        if (playerCharacter.X > firstEnemy.X && !firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect))
                         {
                             firstEnemy.State = CharacterStates.WalkRight;
                         }
-                        if (playerCharacter.X < firstEnemy.X)
+                        if (playerCharacter.X < firstEnemy.X && !firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect))
                         {
                             firstEnemy.State = CharacterStates.WalkLeft;
                         }
                         break;
                     case CharacterStates.FaceLeft:
-                        if (playerCharacter.X > firstEnemy.X)
+                        if (playerCharacter.X > firstEnemy.X && !firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect))
                         {
                             firstEnemy.State = CharacterStates.WalkRight;
                         }
-                        if (playerCharacter.X < firstEnemy.X)
+                        if (playerCharacter.X < firstEnemy.X && !firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect))
                         {
                             firstEnemy.State = CharacterStates.WalkLeft;
                         }
                         break;
                     case CharacterStates.WalkRight:
+                        firstEnemy.Move(playerCharacter);
+                        localEnemyAttackRanRect.X += firstEnemy.Speed;
+                        localEnemyAttackRanRect.Y += firstEnemy.Speed;
+                        firstEnemy.AtkRanRect = localEnemyAttackRanRect;
+                        if (firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect))
+                        {
+                            firstEnemy.State = CharacterStates.MeleeAttack;
+                        }
                         break;
                     case CharacterStates.WalkLeft:
+                        firstEnemy.Move(playerCharacter);
+                        localEnemyAttackRanRect.X += firstEnemy.Speed;
+                        localEnemyAttackRanRect.Y += firstEnemy.Speed;
+                        firstEnemy.AtkRanRect = localEnemyAttackRanRect;
+                        if (firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect))
+                        {
+                            firstEnemy.State = CharacterStates.MeleeAttack;
+                        }
                         break;
                     case CharacterStates.MeleeAttack:
+                        if (startedAttacking == false)
+                        {
+                            firstEnemy.Attack(playerCharacter);
+                            startingAttackTime = (int)gameTime.TotalGameTime.TotalSeconds;
+                        }
+                        else if (startingAttackTime + 1 == (int)gameTime.TotalGameTime.TotalSeconds)
+                        {
+                            startedAttacking = false;
+                            if (!firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect) && playerCharacter.X < firstEnemy.X)
+                            {
+                                firstEnemy.State = CharacterStates.WalkLeft;
+                            }
+                            if (!firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect) && playerCharacter.X > firstEnemy.X)
+                            {
+                                firstEnemy.State = CharacterStates.WalkRight;
+                            }
+                        }
                         break;
+                }
+                if (playerCharacter.HP < 1)
+                {
+                    gameOver = true;
+                }
+                if (gameOver)
+                {
+                    this.Exit();
                 }
             }
 
@@ -191,7 +265,9 @@ namespace Project_Forest
 
             spriteBatch.Begin();
 
-            view.Draw(spriteBatch, entities);
+            view.DrawEntities(spriteBatch, entities);
+
+            view.DrawBackground(spriteBatch, groundTexture, 0, mainCharacterStartingY + mainCharacterStartingRect.Height);
 
             spriteBatch.End();
 

@@ -21,17 +21,17 @@ namespace Project_Forest
         {
             if(X > player.X)
             {
-                X--;
+                X -= Speed;
             }
             if(X < player.X)
             {
-                X++;
+                X += Speed;
             }
         }
 
         public override void Attack(MainCharacter player)
         {
-            player.HP -= 2;
+            player.HP -= 20;
         }
     }
 }

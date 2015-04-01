@@ -21,12 +21,12 @@ namespace Project_Forest
         public int X
         {
             get { return x; }
-            set { x = value; }
+            set { x = value; coRect.X = value; }
         }
         public int Y
         {
             get { return y; }
-            set { y = value; }
+            set { y = value; coRect.Y = value; }
         }
 
         public Rectangle CoRect

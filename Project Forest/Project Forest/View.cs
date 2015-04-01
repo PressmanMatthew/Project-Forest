@@ -32,7 +32,7 @@ namespace Project_Forest
         /// <param name="sb">Spritebatch for drawing to the screen</param>
         /// <param name="list">The list of entities to be drawn</param>
 
-        public void Draw(SpriteBatch sb, List<IEntity> list)
+        public void DrawEntities(SpriteBatch sb, List<IEntity> list)
         {
             entities = list; //Assign the passed in list to the local list
 
@@ -42,7 +42,7 @@ namespace Project_Forest
                 if (entity is Movable)
                 {
                     Movable movable = entity as Movable;
-                    sb.Draw(movable.Texture, new Vector2(movable.X, movable.Y), Color.White);
+                    sb.Draw(movable.Texture, movable.CoRect, Color.White);
                 }
                 if (entity is Obstacle)
                 {
@@ -50,6 +50,11 @@ namespace Project_Forest
                     //TODO: add code for drawing obstacles to the screen. s
                 }
             }
+        }
+
+        public void DrawBackground(SpriteBatch sb, Texture2D ground, int x, int y)
+        {
+            sb.Draw(ground, new Vector2(x, y), Color.White);
         }
     }
 }
