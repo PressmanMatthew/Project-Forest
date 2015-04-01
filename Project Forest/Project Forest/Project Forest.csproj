@@ -35,7 +35,6 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ButtonController.cs" />
     <Compile Include="ChainSaw.cs" />
     <Compile Include="Damaging.cs" />
     <Compile Include="Enemy.cs" />
