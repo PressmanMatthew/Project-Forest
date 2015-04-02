@@ -19,8 +19,6 @@ namespace Project_Forest
         Stationary, 
         Moving,
     }
-<<<<<<< HEAD
-=======
 
     enum GameStates
     {
@@ -34,5 +32,4 @@ namespace Project_Forest
         Controls,
         Credits,
     }
->>>>>>> origin/Menu
 }
