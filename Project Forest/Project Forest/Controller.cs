@@ -25,6 +25,7 @@ namespace Project_Forest
         List<Keys> mainMenuKeys;
         List<Keys> otherMenuKeys;
         Menu currentMenu;
+        ButtonController buttons;
 
         //field that holds current game state
         private GameStates gameState;
@@ -95,6 +96,8 @@ namespace Project_Forest
             credits = new CreditsMenu(creditsMenuImage, otherMenuKeys);
 
             currentMenu = mainMenu;
+
+            buttons = new ButtonController();
             base.Initialize();
         }
 
