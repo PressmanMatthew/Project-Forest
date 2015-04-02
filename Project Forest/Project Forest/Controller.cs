@@ -19,6 +19,27 @@ namespace Project_Forest
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+<<<<<<< HEAD
+=======
+        CreditsMenu credits;
+        ControlsMenu controls;
+        MainMenu mainMenu;
+        List<Keys> mainMenuKeys;
+        List<Keys> otherMenuKeys;
+        Menu currentMenu;
+        ButtonController buttons;
+
+        //field that holds current game state
+        private GameStates gameState;
+        private MenuStates menuState;
+
+        //texture fields
+        private Texture2D backgroundImage;
+        private Texture2D mainMenuImage;
+        private Texture2D controlsMenuImage;
+        private Texture2D creditsMenuImage;
+
+>>>>>>> origin/Menu
         Level firstLevel;
 
         MainCharacter playerCharacter;
@@ -30,6 +51,7 @@ namespace Project_Forest
 
         View view;
         Model model;
+<<<<<<< HEAD
         Menu mainMenu;
 
         KeyboardState kbState;
@@ -53,6 +75,13 @@ namespace Project_Forest
         bool startedAttacking;
         int startingAttackTime;
         bool gameOver;
+=======
+
+        KeyboardState previousKbState;
+        KeyboardState kbState;
+        Texture2D entTexture;
+        Texture2D mainTexture;
+>>>>>>> origin/Menu
 
         public Controller()
             : base()
@@ -80,6 +109,7 @@ namespace Project_Forest
             firstEnemyAttackRangeRect = new Rectangle(firstEnemyStartingX - 10, firstEnemyStartingY - 10, firstEnemyStartingRect.Width + 20, firstEnemyStartingRect.Height + 20);
             localEnemyAttackRanRect = firstEnemyAttackRangeRect;
             firstLevel = new Level();
+<<<<<<< HEAD
             entities = new List<IEntity>();
             view = new View();
             model = new Model();
@@ -87,7 +117,36 @@ namespace Project_Forest
 
             startedAttacking = false;
             gameOver = false;
+=======
+            //firstEnemy = new Ent();
+            //chain = new ChainSaw();
+            entities = new List<IEntity>();
+            view = new View();
+            model = new Model();
+>>>>>>> origin/Menu
 
+            //set gamestate to menu state
+            gameState = GameStates.Menu;
+            menuState = MenuStates.MainMenu;
+
+            mainMenuKeys = new List<Keys>();
+            mainMenuKeys.Add(Keys.F1);//controls
+            mainMenuKeys.Add(Keys.F2);//credits
+            mainMenuKeys.Add(Keys.Enter);//game
+            mainMenuKeys.Add(Keys.Escape);//exit
+
+            mainMenu = new MainMenu(mainMenuImage, mainMenuKeys);
+            //keys.Clear();
+
+            otherMenuKeys = new List<Keys>();
+            otherMenuKeys.Add(Keys.Back);
+
+            controls = new ControlsMenu(controlsMenuImage, otherMenuKeys);
+            credits = new CreditsMenu(creditsMenuImage, otherMenuKeys);
+
+            currentMenu = mainMenu;
+
+            buttons = new ButtonController();
             base.Initialize();
         }
 
@@ -100,6 +159,7 @@ namespace Project_Forest
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+<<<<<<< HEAD
             mainTexture = this.Content.Load<Texture2D>("Main Character");
             entTexture = this.Content.Load<Texture2D>("Ent 200");
             chainTexture = this.Content.Load<Texture2D>("ChainSaw");
@@ -108,6 +168,21 @@ namespace Project_Forest
             playerCharacter = new MainCharacter(mainCharacterStartingX, mainCharacterStartingY, mainCharacterStartingRect, mainTexture, 1, 10, 100, chain);
             firstEnemy = new Ent(firstEnemyStartingX, firstEnemyStartingY, firstEnemyStartingRect, entTexture, 1, 5, 100, firstEnemyAttackRangeRect);
             chain = new ChainSaw(mainCharacterStartingX, mainCharacterStartingY, chainRect, chainTexture, 0, 2, 50);
+=======
+            //loading textures (INSERT BACKGROUND FILE NAME and Menu FILE NAME)
+            mainMenuImage = this.Content.Load<Texture2D>("mainmenu");
+            controlsMenuImage = this.Content.Load<Texture2D>("controls");
+            creditsMenuImage = this.Content.Load<Texture2D>("credits");
+
+            mainMenu.getsetImage = mainMenuImage;
+            controls.getsetImage = controlsMenuImage;
+            credits.getsetImage = creditsMenuImage;
+
+            mainTexture = this.Content.Load<Texture2D>("Main Character");
+
+            playerCharacter = new MainCharacter((GraphicsDevice.Viewport.Width / 3) * 2, GraphicsDevice.Viewport.Height / 6,
+                new Rectangle((GraphicsDevice.Viewport.Width / 3) * 2, GraphicsDevice.Viewport.Height / 6, 50, 100), mainTexture, 1, 5, 100, chain);
+>>>>>>> origin/Menu
 
             entities.Add(playerCharacter);
         }
@@ -133,6 +208,7 @@ namespace Project_Forest
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+<<<<<<< HEAD
             kbState = Keyboard.GetState();
 
             if (view.State == ViewStates.Stationary)
@@ -246,6 +322,142 @@ namespace Project_Forest
                 {
                     this.Exit();
                 }
+=======
+            previousKbState = kbState;
+
+            kbState = Keyboard.GetState();
+
+            //setting images based on states
+            switch (gameState)
+            {
+                //if gamestate is menu do these things
+                case GameStates.Menu:
+                    switch (menuState)
+                    {
+                        case MenuStates.MainMenu:
+                            currentMenu = mainMenu;
+
+                            //if user presses...Enter
+                            if (SingleKeyPress(mainMenu.getKeys[2]))
+                            {
+                                //change state to start state
+                                gameState = GameStates.Game;
+                            }
+                            //if user presses...F1 - controls
+                            else if (SingleKeyPress(mainMenu.getKeys[0]))
+                            {
+                                menuState = MenuStates.Controls;
+
+                            }
+                            //if user presses...F2 - credits
+                            else if (SingleKeyPress(mainMenu.getKeys[1]))
+                            {
+                                menuState = MenuStates.Credits;
+                            }
+                            //if user presses...Escape
+                            else if (SingleKeyPress(mainMenu.getKeys[3]))
+                            {
+                                this.Exit();
+                            }
+                            break;
+
+                        case MenuStates.Controls:
+                            currentMenu = controls;
+
+                            //if user presses...Back
+                            if (SingleKeyPress(controls.getKeys[0]))
+                            {
+                                //set drawing
+                                menuState = MenuStates.MainMenu;
+                            }
+                            break;
+                        case MenuStates.Credits:
+                            currentMenu = credits;
+
+                            //if user presses...Back
+                            if (SingleKeyPress(credits.getKeys[0]))
+                            {
+                                //set drawing
+                                menuState = MenuStates.MainMenu;
+                            }
+                            break;
+
+                    }
+                    break;
+                case GameStates.Game:
+                    if (view.State == ViewStates.Stationary)
+                    {
+                        switch (playerCharacter.State)
+                        {
+                            case CharacterStates.FaceRight:
+                                if (kbState.IsKeyDown(Keys.Right))
+                                {
+                                    playerCharacter.State = CharacterStates.WalkRight;
+                                }
+                                if (kbState.IsKeyDown(Keys.Left))
+                                {
+                                    playerCharacter.State = CharacterStates.WalkLeft;
+                                }
+                                break;
+                            case CharacterStates.FaceLeft:
+                                if (kbState.IsKeyDown(Keys.Right))
+                                {
+                                    playerCharacter.State = CharacterStates.WalkRight;
+                                }
+                                if (kbState.IsKeyDown(Keys.Left))
+                                {
+                                    playerCharacter.State = CharacterStates.WalkLeft;
+                                }
+                                break;
+                            case CharacterStates.WalkRight:
+                                playerCharacter.X += playerCharacter.Speed;
+                                if (kbState.IsKeyUp(Keys.Right))
+                                {
+                                    playerCharacter.State = CharacterStates.FaceRight;
+                                }
+                                break;
+                            case CharacterStates.WalkLeft:
+                                playerCharacter.X -= playerCharacter.Speed;
+                                if (kbState.IsKeyUp(Keys.Left))
+                                {
+                                    playerCharacter.State = CharacterStates.FaceLeft;
+                                }
+                                break;
+                            case CharacterStates.MeleeAttack:
+                                break;
+                        }
+                        switch (firstEnemy.State)
+                        {
+                            case CharacterStates.FaceRight:
+                                if (playerCharacter.X > firstEnemy.X)
+                                {
+                                    firstEnemy.State = CharacterStates.WalkRight;
+                                }
+                                if (playerCharacter.X < firstEnemy.X)
+                                {
+                                    firstEnemy.State = CharacterStates.WalkLeft;
+                                }
+                                break;
+                            case CharacterStates.FaceLeft:
+                                if (playerCharacter.X > firstEnemy.X)
+                                {
+                                    firstEnemy.State = CharacterStates.WalkRight;
+                                }
+                                if (playerCharacter.X < firstEnemy.X)
+                                {
+                                    firstEnemy.State = CharacterStates.WalkLeft;
+                                }
+                                break;
+                            case CharacterStates.WalkRight:
+                                break;
+                            case CharacterStates.WalkLeft:
+                                break;
+                            case CharacterStates.MeleeAttack:
+                                break;
+                        }
+                    }
+                break;
+>>>>>>> origin/Menu
             }
 
             entities.Clear();
@@ -265,13 +477,28 @@ namespace Project_Forest
 
             spriteBatch.Begin();
 
+<<<<<<< HEAD
             view.DrawEntities(spriteBatch, entities);
 
             view.DrawBackground(spriteBatch, groundTexture, 0, mainCharacterStartingY + mainCharacterStartingRect.Height);
+=======
+            view.Draw(spriteBatch, entities);
+            view.DrawMenu(spriteBatch, gameState, currentMenu);
+>>>>>>> origin/Menu
 
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        private bool SingleKeyPress(Keys key)
+        {
+            if (previousKbState.IsKeyUp(key) && kbState.IsKeyDown(key))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

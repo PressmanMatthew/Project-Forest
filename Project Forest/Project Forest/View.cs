@@ -32,7 +32,11 @@ namespace Project_Forest
         /// <param name="sb">Spritebatch for drawing to the screen</param>
         /// <param name="list">The list of entities to be drawn</param>
 
+<<<<<<< HEAD
         public void DrawEntities(SpriteBatch sb, List<IEntity> list)
+=======
+        public void Draw(SpriteBatch sb, List<IEntity> list)
+>>>>>>> origin/Menu
         {
             entities = list; //Assign the passed in list to the local list
 
@@ -42,7 +46,11 @@ namespace Project_Forest
                 if (entity is Movable)
                 {
                     Movable movable = entity as Movable;
+<<<<<<< HEAD
                     sb.Draw(movable.Texture, movable.CoRect, Color.White);
+=======
+                    sb.Draw(movable.Texture, new Vector2(movable.X, movable.Y), Color.White);
+>>>>>>> origin/Menu
                 }
                 if (entity is Obstacle)
                 {
@@ -52,9 +60,20 @@ namespace Project_Forest
             }
         }
 
+<<<<<<< HEAD
         public void DrawBackground(SpriteBatch sb, Texture2D ground, int x, int y)
         {
             sb.Draw(ground, new Vector2(x, y), Color.White);
+=======
+        public void DrawMenu(SpriteBatch sb, GameStates gState, Menu cMenu)
+        {
+            //if state is in menu state
+            if (gState == GameStates.Menu)
+            {
+
+                sb.Draw(cMenu.getsetImage, new Rectangle(0, 0, cMenu.getsetImage.Width, cMenu.getsetImage.Height), Color.White);
+            }
+>>>>>>> origin/Menu
         }
     }
 }

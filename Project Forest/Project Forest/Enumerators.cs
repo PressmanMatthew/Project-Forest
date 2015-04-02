@@ -19,4 +19,20 @@ namespace Project_Forest
         Stationary, 
         Moving,
     }
+<<<<<<< HEAD
+=======
+
+    enum GameStates
+    {
+        Menu,
+        Game,
+    }
+
+    enum MenuStates
+    {
+        MainMenu,
+        Controls,
+        Credits,
+    }
+>>>>>>> origin/Menu
 }
