@@ -53,6 +53,7 @@ namespace Project_Forest
         Texture2D mainTexture;
         Texture2D chainTexture;
         Texture2D groundTexture;
+        SpriteFont arial;
 
         int mainCharacterStartingX;
         int mainCharacterStartingY;
@@ -149,6 +150,8 @@ namespace Project_Forest
             mainMenuImage = this.Content.Load<Texture2D>("MainMenu");
             controlsMenuImage = this.Content.Load<Texture2D>("ControlsMenu");
             creditsMenuImage = this.Content.Load<Texture2D>("CreditsMenu");
+
+            arial = this.Content.Load<SpriteFont>("Arial14");
 
             playerCharacter = new MainCharacter(mainCharacterStartingX, mainCharacterStartingY, mainCharacterStartingRect, mainTexture, 1, 10, 100, chain);
             firstEnemy = new Ent(firstEnemyStartingX, firstEnemyStartingY, firstEnemyStartingRect, entTexture, 1, 5, 100, firstEnemyAttackRangeRect);
@@ -309,7 +312,6 @@ namespace Project_Forest
                             case CharacterStates.WalkRight:
                                 firstEnemy.Move(playerCharacter);
                                 localEnemyAttackRanRect.X += firstEnemy.Speed;
-                                localEnemyAttackRanRect.Y += firstEnemy.Speed;
                                 firstEnemy.AtkRanRect = localEnemyAttackRanRect;
                                 if (firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect))
                                 {
@@ -318,8 +320,7 @@ namespace Project_Forest
                                 break;
                             case CharacterStates.WalkLeft:
                                 firstEnemy.Move(playerCharacter);
-                                localEnemyAttackRanRect.X += firstEnemy.Speed;
-                                localEnemyAttackRanRect.Y += firstEnemy.Speed;
+                                localEnemyAttackRanRect.X -= firstEnemy.Speed;
                                 firstEnemy.AtkRanRect = localEnemyAttackRanRect;
                                 if (firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect))
                                 {
@@ -331,8 +332,9 @@ namespace Project_Forest
                                 {
                                     firstEnemy.Attack(playerCharacter);
                                     startingAttackTime = (int)gameTime.TotalGameTime.TotalSeconds;
+                                    startedAttacking = true;
                                 }
-                                else if (startingAttackTime + 1 == (int)gameTime.TotalGameTime.TotalSeconds)
+                                else if (startingAttackTime + 3 == (int)gameTime.TotalGameTime.TotalSeconds)
                                 {
                                     startedAttacking = false;
                                     if (!firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect) && playerCharacter.X < firstEnemy.X)
@@ -348,17 +350,15 @@ namespace Project_Forest
                         }
                     }
                     break;
-                if (playerCharacter.HP < 1)
-                {
-                    gameOver = true;
-                }
-                if (gameOver)
-                {
-                    this.Exit();
-                }
- 
+            }
 
- 
+            if (playerCharacter.HP < 1)
+            {
+                gameOver = true;
+            }
+            if (gameOver)
+            {
+                this.Exit();
             }
 
             entities.Clear();
@@ -381,6 +381,8 @@ namespace Project_Forest
             view.DrawBackground(spriteBatch, groundTexture, 0, mainCharacterStartingY + mainCharacterStartingRect.Height);
  
             view.DrawEntities(spriteBatch, entities);
+
+            view.DrawOverlaw(spriteBatch, arial, playerCharacter.HP.ToString());
 
             view.DrawMenu(spriteBatch, gameState, currentMenu);
 

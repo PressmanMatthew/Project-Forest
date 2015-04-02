@@ -22,10 +22,12 @@ namespace Project_Forest
             if(X > player.X)
             {
                 X -= Speed;
+                Direction = 0;
             }
             if(X < player.X)
             {
                 X += Speed;
+                Direction = 1;
             }
         }
 

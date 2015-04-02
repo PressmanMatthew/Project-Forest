@@ -43,8 +43,17 @@ namespace Project_Forest
                 if (entity is Movable)
                 {
                     Movable movable = entity as Movable;
- 
-                    sb.Draw(movable.Texture, movable.CoRect, Color.White);
+
+                    if (movable.Direction == 0)
+                    {
+                        sb.Draw(movable.Texture, movable.CoRect, Color.White);
+                    }
+                    else
+                    {
+                        Rectangle sourceRect = new Rectangle(0,0, movable.Texture.Width, movable.Texture.Height);
+                        sb.Draw(movable.Texture, movable.CoRect, sourceRect, Color.White, 0.0f, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
+                    }
+                    
  
                 }
                 if (entity is Obstacle)
@@ -70,6 +79,12 @@ namespace Project_Forest
                 sb.Draw(cMenu.getsetImage, new Rectangle(0, 0, cMenu.getsetImage.Width, cMenu.getsetImage.Height), Color.White);
             }
  
+        }
+
+
+        public void DrawOverlaw(SpriteBatch sb, SpriteFont font, string hp)
+        {
+            sb.DrawString(font, "HP: " + hp, new Vector2(0, 0), Color.Black);
         }
     }
 }
