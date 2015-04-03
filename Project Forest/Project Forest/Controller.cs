@@ -90,7 +90,7 @@ namespace Project_Forest
         {
             mainCharacterStartingX = (GraphicsDevice.Viewport.Width / 3);
             mainCharacterStartingY = (GraphicsDevice.Viewport.Height / 6) * 3;
-            mainCharacterStartingRect = new Rectangle(mainCharacterStartingX, mainCharacterStartingY, 50, 100);
+            mainCharacterStartingRect = new Rectangle(mainCharacterStartingX, mainCharacterStartingY, 72, 100);
 
             firstEnemyStartingX = ((GraphicsDevice.Viewport.Width / 3) * 2 + 50);
             firstEnemyStartingY = (GraphicsDevice.Viewport.Height / 6) * 3;
@@ -141,7 +141,7 @@ namespace Project_Forest
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
  
-            mainTexture = this.Content.Load<Texture2D>("Main Character");
+            mainTexture = this.Content.Load<Texture2D>("Main Character200");
             entTexture = this.Content.Load<Texture2D>("Ent 200");
             chainTexture = this.Content.Load<Texture2D>("ChainSaw");
             groundTexture = this.Content.Load<Texture2D>("Ground");
@@ -271,6 +271,7 @@ namespace Project_Forest
                                 }
                                 break;
                             case CharacterStates.WalkRight:
+                                playerCharacter.Direction = 1;
                                 playerCharacter.X += playerCharacter.Speed;
                                 if (kbState.IsKeyUp(Keys.Right))
                                 {
@@ -278,6 +279,7 @@ namespace Project_Forest
                                 }
                                 break;
                             case CharacterStates.WalkLeft:
+                                playerCharacter.Direction = 0;
                                 playerCharacter.X -= playerCharacter.Speed;
                                 if (kbState.IsKeyUp(Keys.Left))
                                 {
