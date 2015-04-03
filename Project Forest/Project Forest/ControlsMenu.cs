@@ -4,17 +4,16 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Project_Forest
 {
-    interface IEntity
+    class ControlsMenu:Menu
     {
-        //removed uneeded content
-        int X{ get; set;}
+        public ControlsMenu(Texture2D image, List<Keys> keys)
+            :base(image, keys)
+        {
 
-        int Y { get; set;}
-
-        Rectangle CoRect{ get; set;}
-        bool IsColliding(IEntity entity);
+        }
     }
 }
