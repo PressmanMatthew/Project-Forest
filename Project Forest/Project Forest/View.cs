@@ -44,7 +44,37 @@ namespace Project_Forest
                 {
                     Movable movable = entity as Movable;
 
-                    if (movable.Direction == 0)
+                    if (movable is Damaging)
+                    {
+                        Damaging damaging = movable as Damaging;
+
+                        if (damaging.Active)
+                        {
+                            if (damaging is ChainSaw)
+                            {
+                                ChainSaw chain = damaging as ChainSaw;
+
+                                Rectangle sourceRect = new Rectangle(0, 0, chain.Texture.Width, chain.Texture.Height);
+                                if (chain.Direction == 1)
+                                {
+                                    sb.Draw(chain.Texture, chain.CoRect, sourceRect, Color.White, chain.Rotation, new Vector2(0, 0), SpriteEffects.FlipHorizontally, 0f);
+                                }
+                                else
+                                {
+                                    sb.Draw(chain.Texture, chain.CoRect, sourceRect, Color.White, chain.Rotation, new Vector2(0, 0), SpriteEffects.None, 0f);
+                                }
+                            }
+                            else 
+                            {
+                                sb.Draw(damaging.Texture, damaging.CoRect, Color.White);
+                            }
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    else if (movable.Direction == 1)
                     {
                         sb.Draw(movable.Texture, movable.CoRect, Color.White);
                     }
@@ -82,7 +112,7 @@ namespace Project_Forest
         }
 
 
-        public void DrawOverlaw(SpriteBatch sb, SpriteFont font, string hp)
+        public void DrawOverlay(SpriteBatch sb, SpriteFont font, string hp)
         {
             sb.DrawString(font, "HP: " + hp, new Vector2(0, 0), Color.Black);
         }
