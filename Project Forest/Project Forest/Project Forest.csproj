@@ -38,6 +38,7 @@
     <Compile Include="ChainSaw.cs" />
     <Compile Include="Damaging.cs" />
     <Compile Include="Enemy.cs" />
+    <Compile Include="EnemyBullet.cs" />
     <Compile Include="Ent.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="Enumerators.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="IProjectile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RangedEnemy.cs" />
     <Compile Include="View.cs" />
   </ItemGroup>
   <ItemGroup>
