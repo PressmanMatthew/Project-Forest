@@ -18,11 +18,13 @@ namespace Project_Forest
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
         CreditsMenu credits;
         ControlsMenu controls;
         MainMenu mainMenu;
-        List<Keys> mainMenuKeys;
-        List<Keys> otherMenuKeys;
+        List<MenuOption> mainMenuOptions;
+        List<MenuOption> controlsOptions;
+        List<MenuOption> creditsOptions;
         Menu currentMenu;
         ButtonController buttons;
 
@@ -53,6 +55,7 @@ namespace Project_Forest
         Texture2D mainTexture;
         Texture2D chainTexture;
         Texture2D groundTexture;
+        Texture2D menuSelectionArrow;
         SpriteFont arial;
 
         int mainCharacterStartingX;
@@ -65,6 +68,7 @@ namespace Project_Forest
         Rectangle firstEnemyAttackRangeRect;
         Rectangle chainRect;
         Rectangle localEnemyAttackRanRect;
+        Rectangle menuSelectionArrowRect;
 
         bool startedAttacking;
         int startingAttackTime;
@@ -110,20 +114,26 @@ namespace Project_Forest
             gameState = GameStates.Menu;
             menuState = MenuStates.MainMenu;
 
-            mainMenuKeys = new List<Keys>();
-            mainMenuKeys.Add(Keys.F1);//controls
-            mainMenuKeys.Add(Keys.F2);//credits
-            mainMenuKeys.Add(Keys.Enter);//game
-            mainMenuKeys.Add(Keys.Escape);//exit
+            mainMenuOptions.Add(new MenuOption("Play", (GraphicsDevice.Viewport.Width / 2) - 50, (GraphicsDevice.Viewport.Height / 2) - 100));
+            mainMenuOptions.Add(new MenuOption("Controls", (GraphicsDevice.Viewport.Width / 2) - 50, (GraphicsDevice.Viewport.Height / 2) - 50));
+            mainMenuOptions.Add(new MenuOption("Credits", (GraphicsDevice.Viewport.Width / 2) - 50, (GraphicsDevice.Viewport.Height / 2)));
+            mainMenuOptions.Add(new MenuOption("Quit", (GraphicsDevice.Viewport.Width / 2) - 50, (GraphicsDevice.Viewport.Height / 2) + 50));
 
-            mainMenu = new MainMenu(mainMenuImage, mainMenuKeys);
+            controlsOptions.Add(new MenuOption("Left", (GraphicsDevice.Viewport.Width / 2) - 50, (GraphicsDevice.Viewport.Height / 2) - 150));
+            controlsOptions.Add(new MenuOption("Right", (GraphicsDevice.Viewport.Width / 2) - 50, (GraphicsDevice.Viewport.Height / 2) - 100));
+            controlsOptions.Add(new MenuOption("Melee", (GraphicsDevice.Viewport.Width / 2) - 50, (GraphicsDevice.Viewport.Height / 2) - 50));
+            controlsOptions.Add(new MenuOption("MidRange", (GraphicsDevice.Viewport.Width / 2) - 50, (GraphicsDevice.Viewport.Height / 2)));
+            controlsOptions.Add(new MenuOption("Range", (GraphicsDevice.Viewport.Width / 2) - 50, (GraphicsDevice.Viewport.Height / 2) + 50));
+
+            creditsOptions.Add(new MenuOption("Back", (GraphicsDevice.Viewport.Width / 2) - 50, (GraphicsDevice.Viewport.Height / 2) -25 ));
+
+            mainMenu = new MainMenu(mainMenuImage, mainMenuOptions);
             //keys.Clear();
 
-            otherMenuKeys = new List<Keys>();
-            otherMenuKeys.Add(Keys.Back);
 
-            controls = new ControlsMenu(controlsMenuImage, otherMenuKeys);
-            credits = new CreditsMenu(creditsMenuImage, otherMenuKeys);
+
+            controls = new ControlsMenu(controlsMenuImage, controlsOptions);
+            credits = new CreditsMenu(creditsMenuImage, creditsOptions);
 
             currentMenu = mainMenu;
 
@@ -150,6 +160,8 @@ namespace Project_Forest
             mainMenuImage = this.Content.Load<Texture2D>("MainMenu");
             controlsMenuImage = this.Content.Load<Texture2D>("ControlsMenu");
             creditsMenuImage = this.Content.Load<Texture2D>("CreditsMenu");
+            menuSelectionArrow = this.Content.Load<Texture2D>("ArrowRight");
+
 
             arial = this.Content.Load<SpriteFont>("Arial14");
 
@@ -197,48 +209,153 @@ namespace Project_Forest
                     {
                         case MenuStates.MainMenu:
                             currentMenu = mainMenu;
+                            currentMenu.CurrentMenuSelection = ArrowSelection.Play;
 
-                            //if user presses...Enter
-                            if (SingleKeyPress(mainMenu.getKeys[2]))
+                            if (currentMenu.CurrentMenuSelection == ArrowSelection.Play)
                             {
-                                //change state to start state
-                                gameState = GameStates.Game;
-                            }
-                            //if user presses...F1 - controls
-                            else if (SingleKeyPress(mainMenu.getKeys[0]))
-                            {
-                                menuState = MenuStates.Controls;
 
+                                if(SingleKeyPress(Keys.Down))
+                                {
+                                    currentMenu.CurrentMenuSelection = ArrowSelection.Controls;
+                                }
+                                if(SingleKeyPress(Keys.Enter))
+                                {
+                                    gameState = GameStates.Game;
+                                }
                             }
-                            //if user presses...F2 - credits
-                            else if (SingleKeyPress(mainMenu.getKeys[1]))
+                            if (currentMenu.CurrentMenuSelection == ArrowSelection.Controls)
                             {
-                                menuState = MenuStates.Credits;
+                                if (SingleKeyPress(Keys.Up))
+                                {
+                                    currentMenu.CurrentMenuSelection = ArrowSelection.Play;
+                                }
+                                if(SingleKeyPress(Keys.Down))
+                                {
+                                    currentMenu.CurrentMenuSelection = ArrowSelection.Credits;
+                                }
+                                if (SingleKeyPress(Keys.Enter))
+                                {
+                                    menuState = MenuStates.Controls;
+                                }
                             }
-                            //if user presses...Escape
-                            else if (SingleKeyPress(mainMenu.getKeys[3]))
+                            if (currentMenu.CurrentMenuSelection == ArrowSelection.Credits)
                             {
-                                this.Exit();
+                                if (SingleKeyPress(Keys.Up))
+                                {
+                                    currentMenu.CurrentMenuSelection = ArrowSelection.Controls;
+                                }
+                                if (SingleKeyPress(Keys.Down))
+                                {
+                                    currentMenu.CurrentMenuSelection = ArrowSelection.Quit;
+                                }
+                                if (SingleKeyPress(Keys.Enter))
+                                {
+                                    menuState = MenuStates.Credits;
+                                }
+                            }
+                            if (currentMenu.CurrentMenuSelection == ArrowSelection.Quit)
+                            {
+
+                                if (SingleKeyPress(Keys.Up))
+                                {
+                                    currentMenu.CurrentMenuSelection = ArrowSelection.Credits;
+                                }
+                                if (SingleKeyPress(Keys.Enter))
+                                {
+                                    this.Exit();
+                                }
                             }
                             break;
 
                         case MenuStates.Controls:
                             currentMenu = controls;
 
-                            //if user presses...Back
-                            if (SingleKeyPress(controls.getKeys[0]))
+                            currentMenu.CurrentMenuSelection = ArrowSelection.MoveLeft;
+
+                            if (currentMenu.CurrentMenuSelection == ArrowSelection.MoveLeft)
                             {
-                                //set drawing
-                                menuState = MenuStates.MainMenu;
+
+                                if(SingleKeyPress(Keys.Down))
+                                {
+                                    currentMenu.CurrentMenuSelection = ArrowSelection.MoveRight;
+                                }
+                                if(SingleKeyPress(Keys.Enter))
+                                {
+                                    //
+                                }
                             }
+                            if (currentMenu.CurrentMenuSelection == ArrowSelection.MeleeAttack)
+                            {
+                                if (SingleKeyPress(Keys.Up))
+                                {
+                                    currentMenu.CurrentMenuSelection = ArrowSelection.MoveRight;
+                                }
+                                if(SingleKeyPress(Keys.Down))
+                                {
+                                    currentMenu.CurrentMenuSelection = ArrowSelection.MidRangeAttack;
+                                }
+                                if (SingleKeyPress(Keys.Enter))
+                                {
+                                    //
+                                }
+                            }
+                            if (currentMenu.CurrentMenuSelection == ArrowSelection.MidRangeAttack)
+                            {
+                                if (SingleKeyPress(Keys.Up))
+                                {
+                                    currentMenu.CurrentMenuSelection = ArrowSelection.MeleeAttack;
+                                }
+                                if (SingleKeyPress(Keys.Down))
+                                {
+                                    currentMenu.CurrentMenuSelection = ArrowSelection.RangeAttack;
+                                }
+                                if (SingleKeyPress(Keys.Enter))
+                                {
+                                    //
+                                }
+                            }
+                            if (currentMenu.CurrentMenuSelection == ArrowSelection.RangeAttack)
+                            {
+
+                                if (SingleKeyPress(Keys.Up))
+                                {
+                                    currentMenu.CurrentMenuSelection = ArrowSelection.MidRangeAttack;
+                                }
+                                if (SingleKeyPress(Keys.Down))
+                                {
+                                    currentMenu.CurrentMenuSelection = ArrowSelection.Back;
+                                }
+                                if (SingleKeyPress(Keys.Enter))
+                                {
+                                    //
+                                }
+                            }
+                            if(currentMenu.CurrentMenuSelection == ArrowSelection.Back)
+                            {
+                                if (SingleKeyPress(Keys.Up))
+                                {
+                                    currentMenu.CurrentMenuSelection = ArrowSelection.RangeAttack;
+                                }
+                                if (SingleKeyPress(Keys.Enter))
+                                {
+                                    menuState = MenuStates.MainMenu;
+                                }
+                            }
+
+                            //////if user presses...Back
+                            ////if (SingleKeyPress(controls.getKeys[0]))
+                            ////{
+                            ////    //set drawing
+                            ////    menuState = MenuStates.MainMenu;
+                            ////}
                             break;
                         case MenuStates.Credits:
                             currentMenu = credits;
 
+                            currentMenu.CurrentMenuSelection = ArrowSelection.Back;
                             //if user presses...Back
-                            if (SingleKeyPress(credits.getKeys[0]))
+                            if (SingleKeyPress(Keys.Enter))
                             {
-                                //set drawing
                                 menuState = MenuStates.MainMenu;
                             }
                             break;
@@ -352,6 +469,11 @@ namespace Project_Forest
                         }
                     }
                     break;
+            }
+
+            if(gameState == GameStates.Menu)
+            {
+                
             }
 
             if (playerCharacter.HP < 1)

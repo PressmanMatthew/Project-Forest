@@ -32,4 +32,19 @@ namespace Project_Forest
         Controls,
         Credits,
     }
+
+    enum ArrowSelection
+    {
+        Play,
+        Quit,
+        Credits,
+        Controls,
+        Back,
+        MeleeAttack,
+        MidRangeAttack,
+        RangeAttack,
+        MoveLeft,
+        MoveRight,
+
+    }
 }

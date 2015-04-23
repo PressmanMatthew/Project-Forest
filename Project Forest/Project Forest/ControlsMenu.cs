@@ -10,8 +10,8 @@ namespace Project_Forest
 {
     class ControlsMenu:Menu
     {
-        public ControlsMenu(Texture2D image, List<Keys> keys)
-            :base(image, keys)
+        public ControlsMenu(Texture2D image, List<MenuOption> menuOptions)
+            : base(image, menuOptions)
         {
 
         }

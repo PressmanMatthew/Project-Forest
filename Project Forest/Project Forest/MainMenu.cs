@@ -10,8 +10,8 @@ namespace Project_Forest
 {
     class MainMenu:Menu
     {
-        public MainMenu(Texture2D image, List<Keys> keys)
-            :base(image, keys)
+        public MainMenu(Texture2D image, List<MenuOption> menuOptions)
+            :base(image, menuOptions)
         {
 
         }
