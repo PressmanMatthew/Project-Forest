@@ -11,12 +11,31 @@ namespace Project_Forest
     {
         List<IEntity> entities; //List of entities to draw to the screen
         ViewStates state; //The current state of the view
+        Rectangle currentLevelView;
 
         //Accessor and mutator for state
         public ViewStates State
         {
             get { return state; }
             set { state = value; }
+        }
+
+        public Rectangle CurrentLevelView
+        {
+            get { return currentLevelView; }
+            set { currentLevelView = value; }
+        }
+
+        public int X
+        {
+            get { return currentLevelView.X; }
+            set { currentLevelView.X = value; }
+        }
+
+        public int Y
+        {
+            get { return currentLevelView.Y; }
+            set { currentLevelView.Y = value; }
         }
 
         //Constructor that makes objects of the fields
@@ -75,6 +94,24 @@ namespace Project_Forest
                         }
                     }
                     else if (movable.Direction == 1)
+                    if (movable is Enemy)
+                    {
+                        Enemy enemy = movable as Enemy;
+                        if (enemy is Ent)
+                        {
+                            Ent ent = enemy as Ent;
+                            if (ent.Direction == 0)
+                            {
+                                sb.Draw(ent.Texture, ent.CoRect, Color.White);
+                            }
+                            else
+                            {
+                                Rectangle sourceRect = new Rectangle(0, 0, ent.Texture.Width, ent.Texture.Height);
+                                sb.Draw(ent.Texture, ent.CoRect, sourceRect, Color.White, 0.0f, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
+                            }
+                        }
+                    }
+                    else if (movable.Direction == 0)
                     {
                         sb.Draw(movable.Texture, movable.CoRect, Color.White);
                     }
