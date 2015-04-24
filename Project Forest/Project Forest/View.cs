@@ -64,6 +64,7 @@ namespace Project_Forest
                     Movable movable = entity as Movable;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                     if (movable is Damaging)
                     {
                         Damaging damaging = movable as Damaging;
@@ -113,6 +114,9 @@ namespace Project_Forest
                         }
                     }
                     else if (movable.Direction == 0)
+=======
+                    if (movable.Direction == 0)
+>>>>>>> parent of 4c81b2c... Chainsaw Mostly Working
 =======
                     if (movable.Direction == 0)
 >>>>>>> parent of 4c81b2c... Chainsaw Mostly Working
