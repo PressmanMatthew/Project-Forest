@@ -97,3 +97,36 @@ D:\Users\mrp3362\Project Forest\Project Forest\bin\Windows\Debug\SharpDX.XInput.
 D:\Users\mrp3362\Project Forest\Project Forest\bin\Windows\Debug\SharpDX.RawInput.xml
 D:\Users\mrp3362\Project Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct3D9.xml
 D:\Users\mrp3362\Project Forest\Project Forest\obj\x86\Debug\Project Forest.csprojResolveAssemblyReference.cache
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\obj\x86\Debug\Project Forest.exe
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\obj\x86\Debug\Project Forest.pdb
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Content\ChainSaw.png
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Content\Ent 200.png
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Content\Ground.png
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Content\Main Character200.png
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Content\Arial14.xnb
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Content\ControlsMenu.png
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Content\CreditsMenu.png
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Content\MainMenu.png
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Project Forest.exe
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Project Forest.pdb
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\MonoGame.Framework.dll
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.MediaFoundation.dll
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.dll
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.XAudio2.dll
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct3D11.dll
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.DXGI.dll
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct2D1.dll
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Lidgren.Network.dll
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.XInput.dll
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.RawInput.dll
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct3D9.dll
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.MediaFoundation.xml
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.xml
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.XAudio2.xml
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct3D11.xml
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.DXGI.xml
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct2D1.xml
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.XInput.xml
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.RawInput.xml
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct3D9.xml
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\obj\x86\Debug\Project Forest.csprojResolveAssemblyReference.cache
