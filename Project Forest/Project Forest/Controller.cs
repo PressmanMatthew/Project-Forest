@@ -19,14 +19,15 @@ namespace Project_Forest
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        CreditsMenu credits;
-        ControlsMenu controls;
+        CreditsMenu creditsMenu;
+        ControlsMenu controlsMenu;
         MainMenu mainMenu;
         List<MenuOption> mainMenuOptions;
         List<MenuOption> controlsOptions;
         List<MenuOption> creditsOptions;
-        Menu currentMenu;
+        Menu currentMenu; 
         ButtonController buttons;
+        Rectangle menuSelectionArrowRect;
 
         //field that holds current game state
         private GameStates gameState;
@@ -55,7 +56,7 @@ namespace Project_Forest
         Texture2D mainTexture;
         Texture2D chainTexture;
         Texture2D groundTexture;
-        Texture2D menuSelectionArrow;
+        Texture2D menuSelectionArrowTexture;
         SpriteFont arial;
 
         int mainCharacterStartingX;
@@ -68,7 +69,7 @@ namespace Project_Forest
         Rectangle firstEnemyAttackRangeRect;
         Rectangle chainRect;
         Rectangle localEnemyAttackRanRect;
-        Rectangle menuSelectionArrowRect;
+        
 
         bool startedAttacking;
         int startingAttackTime;
@@ -114,16 +115,27 @@ namespace Project_Forest
             gameState = GameStates.Menu;
             menuState = MenuStates.MainMenu;
 
+            mainMenuOptions = new List<MenuOption>();
+
+            menuSelectionArrowRect.X = (GraphicsDevice.Viewport.Width / 2) - 200;
+            menuSelectionArrowRect.Width = 50;
+            menuSelectionArrowRect.Height = 50;
+
             mainMenuOptions.Add(new MenuOption("Play", (GraphicsDevice.Viewport.Width / 2) - 50, (GraphicsDevice.Viewport.Height / 2) - 100));
             mainMenuOptions.Add(new MenuOption("Controls", (GraphicsDevice.Viewport.Width / 2) - 50, (GraphicsDevice.Viewport.Height / 2) - 50));
             mainMenuOptions.Add(new MenuOption("Credits", (GraphicsDevice.Viewport.Width / 2) - 50, (GraphicsDevice.Viewport.Height / 2)));
             mainMenuOptions.Add(new MenuOption("Quit", (GraphicsDevice.Viewport.Width / 2) - 50, (GraphicsDevice.Viewport.Height / 2) + 50));
+
+            controlsOptions = new List<MenuOption>();
 
             controlsOptions.Add(new MenuOption("Left", (GraphicsDevice.Viewport.Width / 2) - 50, (GraphicsDevice.Viewport.Height / 2) - 150));
             controlsOptions.Add(new MenuOption("Right", (GraphicsDevice.Viewport.Width / 2) - 50, (GraphicsDevice.Viewport.Height / 2) - 100));
             controlsOptions.Add(new MenuOption("Melee", (GraphicsDevice.Viewport.Width / 2) - 50, (GraphicsDevice.Viewport.Height / 2) - 50));
             controlsOptions.Add(new MenuOption("MidRange", (GraphicsDevice.Viewport.Width / 2) - 50, (GraphicsDevice.Viewport.Height / 2)));
             controlsOptions.Add(new MenuOption("Range", (GraphicsDevice.Viewport.Width / 2) - 50, (GraphicsDevice.Viewport.Height / 2) + 50));
+            controlsOptions.Add(new MenuOption("Back",(GraphicsDevice.Viewport.Width / 2) - 50, (GraphicsDevice.Viewport.Height / 2) + 100));
+
+            creditsOptions = new List<MenuOption>();
 
             creditsOptions.Add(new MenuOption("Back", (GraphicsDevice.Viewport.Width / 2) - 50, (GraphicsDevice.Viewport.Height / 2) -25 ));
 
@@ -132,10 +144,13 @@ namespace Project_Forest
 
 
 
-            controls = new ControlsMenu(controlsMenuImage, controlsOptions);
-            credits = new CreditsMenu(creditsMenuImage, creditsOptions);
+            controlsMenu = new ControlsMenu(controlsMenuImage, controlsOptions);
+            creditsMenu = new CreditsMenu(creditsMenuImage, creditsOptions);
 
             currentMenu = mainMenu;
+            mainMenu.CurrentMenuSelection = ArrowSelection.Play;
+            controlsMenu.CurrentMenuSelection = ArrowSelection.MoveLeft;
+            creditsMenu.CurrentMenuSelection = ArrowSelection.Back;
 
             buttons = new ButtonController();
             base.Initialize();
@@ -160,7 +175,7 @@ namespace Project_Forest
             mainMenuImage = this.Content.Load<Texture2D>("MainMenu");
             controlsMenuImage = this.Content.Load<Texture2D>("ControlsMenu");
             creditsMenuImage = this.Content.Load<Texture2D>("CreditsMenu");
-            menuSelectionArrow = this.Content.Load<Texture2D>("ArrowRight");
+            menuSelectionArrowTexture = this.Content.Load<Texture2D>("ArrowRight");
 
 
             arial = this.Content.Load<SpriteFont>("Arial14");
@@ -170,8 +185,8 @@ namespace Project_Forest
             chain = new ChainSaw(mainCharacterStartingX, mainCharacterStartingY, chainRect, chainTexture, 0, 2, 50);
 
             mainMenu.getsetImage = mainMenuImage;
-            controls.getsetImage = controlsMenuImage;
-            credits.getsetImage = creditsMenuImage;
+            controlsMenu.getsetImage = controlsMenuImage;
+            creditsMenu.getsetImage = creditsMenuImage;
 
             entities.Add(playerCharacter);
         }
@@ -209,11 +224,10 @@ namespace Project_Forest
                     {
                         case MenuStates.MainMenu:
                             currentMenu = mainMenu;
-                            currentMenu.CurrentMenuSelection = ArrowSelection.Play;
 
                             if (currentMenu.CurrentMenuSelection == ArrowSelection.Play)
                             {
-
+                                menuSelectionArrowRect.Y = ((GraphicsDevice.Viewport.Height / 2) - 100);
                                 if(SingleKeyPress(Keys.Down))
                                 {
                                     currentMenu.CurrentMenuSelection = ArrowSelection.Controls;
@@ -223,8 +237,9 @@ namespace Project_Forest
                                     gameState = GameStates.Game;
                                 }
                             }
-                            if (currentMenu.CurrentMenuSelection == ArrowSelection.Controls)
+                            else if (currentMenu.CurrentMenuSelection == ArrowSelection.Controls)
                             {
+                                menuSelectionArrowRect.Y = ((GraphicsDevice.Viewport.Height / 2) -50);
                                 if (SingleKeyPress(Keys.Up))
                                 {
                                     currentMenu.CurrentMenuSelection = ArrowSelection.Play;
@@ -238,8 +253,9 @@ namespace Project_Forest
                                     menuState = MenuStates.Controls;
                                 }
                             }
-                            if (currentMenu.CurrentMenuSelection == ArrowSelection.Credits)
+                            else if (currentMenu.CurrentMenuSelection == ArrowSelection.Credits)
                             {
+                                menuSelectionArrowRect.Y = ((GraphicsDevice.Viewport.Height / 2));
                                 if (SingleKeyPress(Keys.Up))
                                 {
                                     currentMenu.CurrentMenuSelection = ArrowSelection.Controls;
@@ -253,8 +269,9 @@ namespace Project_Forest
                                     menuState = MenuStates.Credits;
                                 }
                             }
-                            if (currentMenu.CurrentMenuSelection == ArrowSelection.Quit)
+                            else if (currentMenu.CurrentMenuSelection == ArrowSelection.Quit)
                             {
+                                menuSelectionArrowRect.Y = ((GraphicsDevice.Viewport.Height / 2) + 50);
 
                                 if (SingleKeyPress(Keys.Up))
                                 {
@@ -268,13 +285,11 @@ namespace Project_Forest
                             break;
 
                         case MenuStates.Controls:
-                            currentMenu = controls;
-
-                            currentMenu.CurrentMenuSelection = ArrowSelection.MoveLeft;
+                            currentMenu = controlsMenu;
 
                             if (currentMenu.CurrentMenuSelection == ArrowSelection.MoveLeft)
                             {
-
+                                menuSelectionArrowRect.Y = ((GraphicsDevice.Viewport.Height / 2)-150);                                
                                 if(SingleKeyPress(Keys.Down))
                                 {
                                     currentMenu.CurrentMenuSelection = ArrowSelection.MoveRight;
@@ -284,8 +299,28 @@ namespace Project_Forest
                                     //
                                 }
                             }
-                            if (currentMenu.CurrentMenuSelection == ArrowSelection.MeleeAttack)
+
+                            else if (currentMenu.CurrentMenuSelection == ArrowSelection.MoveRight)
                             {
+                                menuSelectionArrowRect.Y = ((GraphicsDevice.Viewport.Height / 2) - 100);
+
+                                if (SingleKeyPress(Keys.Up))
+                                {
+                                    currentMenu.CurrentMenuSelection = ArrowSelection.MoveLeft;
+                                }
+                                if (SingleKeyPress(Keys.Down))
+                                {
+                                    currentMenu.CurrentMenuSelection = ArrowSelection.MeleeAttack;
+
+                                }
+                                if (SingleKeyPress(Keys.Enter))
+                                {
+                                    //
+                                }
+                            }
+                            else if (currentMenu.CurrentMenuSelection == ArrowSelection.MeleeAttack)
+                            {
+                                menuSelectionArrowRect.Y = ((GraphicsDevice.Viewport.Height / 2) -50);
                                 if (SingleKeyPress(Keys.Up))
                                 {
                                     currentMenu.CurrentMenuSelection = ArrowSelection.MoveRight;
@@ -299,8 +334,9 @@ namespace Project_Forest
                                     //
                                 }
                             }
-                            if (currentMenu.CurrentMenuSelection == ArrowSelection.MidRangeAttack)
+                            else if (currentMenu.CurrentMenuSelection == ArrowSelection.MidRangeAttack)
                             {
+                                menuSelectionArrowRect.Y = ((GraphicsDevice.Viewport.Height / 2));
                                 if (SingleKeyPress(Keys.Up))
                                 {
                                     currentMenu.CurrentMenuSelection = ArrowSelection.MeleeAttack;
@@ -314,9 +350,9 @@ namespace Project_Forest
                                     //
                                 }
                             }
-                            if (currentMenu.CurrentMenuSelection == ArrowSelection.RangeAttack)
+                            else if (currentMenu.CurrentMenuSelection == ArrowSelection.RangeAttack)
                             {
-
+                                menuSelectionArrowRect.Y = ((GraphicsDevice.Viewport.Height / 2)+50);
                                 if (SingleKeyPress(Keys.Up))
                                 {
                                     currentMenu.CurrentMenuSelection = ArrowSelection.MidRangeAttack;
@@ -330,8 +366,9 @@ namespace Project_Forest
                                     //
                                 }
                             }
-                            if(currentMenu.CurrentMenuSelection == ArrowSelection.Back)
+                            else if(currentMenu.CurrentMenuSelection == ArrowSelection.Back)
                             {
+                                menuSelectionArrowRect.Y = ((GraphicsDevice.Viewport.Height / 2) + 100);
                                 if (SingleKeyPress(Keys.Up))
                                 {
                                     currentMenu.CurrentMenuSelection = ArrowSelection.RangeAttack;
@@ -350,9 +387,8 @@ namespace Project_Forest
                             ////}
                             break;
                         case MenuStates.Credits:
-                            currentMenu = credits;
-
-                            currentMenu.CurrentMenuSelection = ArrowSelection.Back;
+                            currentMenu = creditsMenu;
+                            menuSelectionArrowRect.Y = ((GraphicsDevice.Viewport.Height / 2) - 25);
                             //if user presses...Back
                             if (SingleKeyPress(Keys.Enter))
                             {
@@ -485,6 +521,8 @@ namespace Project_Forest
                 this.Exit();
             }
 
+            System.Diagnostics.Debug.WriteLine(menuSelectionArrowRect);
+
             entities.Clear();
             entities.Add(playerCharacter);
             entities.Add(firstEnemy);
@@ -508,7 +546,7 @@ namespace Project_Forest
 
             view.DrawOverlaw(spriteBatch, arial, playerCharacter.HP.ToString());
 
-            view.DrawMenu(spriteBatch, gameState, currentMenu);
+            view.DrawMenu(spriteBatch, gameState, currentMenu, menuSelectionArrowRect, menuSelectionArrowTexture);
 
             spriteBatch.End();
 
