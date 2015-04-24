@@ -63,6 +63,7 @@ namespace Project_Forest
                 {
                     Movable movable = entity as Movable;
 
+<<<<<<< HEAD
                     if (movable is Damaging)
                     {
                         Damaging damaging = movable as Damaging;
@@ -112,6 +113,9 @@ namespace Project_Forest
                         }
                     }
                     else if (movable.Direction == 0)
+=======
+                    if (movable.Direction == 0)
+>>>>>>> parent of 4c81b2c... Chainsaw Mostly Working
                     {
                         sb.Draw(movable.Texture, movable.CoRect, Color.White);
                     }
@@ -149,7 +153,7 @@ namespace Project_Forest
         }
 
 
-        public void DrawOverlay(SpriteBatch sb, SpriteFont font, string hp)
+        public void DrawOverlaw(SpriteBatch sb, SpriteFont font, string hp)
         {
             sb.DrawString(font, "HP: " + hp, new Vector2(0, 0), Color.Black);
         }

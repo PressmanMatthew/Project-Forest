@@ -43,9 +43,9 @@ namespace Project_Forest
             base.IsColliding(entity);
             return false;
         }
-        public void Attack(Enemy enemy)
+        public void Attack()
         {
-            enemy.HP -= 20;
+
         }
 
         public void Jump()
