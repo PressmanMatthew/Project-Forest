@@ -36,6 +36,7 @@ namespace Project_Forest
         private Texture2D creditsMenuImage;
 
         Level firstLevel;
+        FightScene currentFightScene;
 
         MainCharacter playerCharacter;
         Ent firstEnemy;
@@ -97,10 +98,10 @@ namespace Project_Forest
             chainRect = new Rectangle(mainCharacterStartingX + 30, mainCharacterStartingY + 40, 50, 25);
             firstEnemyAttackRangeRect = new Rectangle(firstEnemyStartingX - 10, firstEnemyStartingY - 10, firstEnemyStartingRect.Width + 20, firstEnemyStartingRect.Height + 20);
             localEnemyAttackRanRect = firstEnemyAttackRangeRect;
-            firstLevel = new Level();
- 
+
             entities = new List<IEntity>();
             view = new View();
+            view.CurrentLevelView = new Rectangle(0, 0, 800, 480);
 
             startedAttacking = false;
             gameOver = false;
@@ -138,7 +139,6 @@ namespace Project_Forest
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
  
             mainTexture = this.Content.Load<Texture2D>("Main Character200");
             entTexture = this.Content.Load<Texture2D>("Ent 200");
@@ -155,6 +155,9 @@ namespace Project_Forest
             playerCharacter = new MainCharacter(mainCharacterStartingX, mainCharacterStartingY, mainCharacterStartingRect, mainTexture, 1, 10, 100, chain);
             firstEnemy = new Ent(firstEnemyStartingX, firstEnemyStartingY, firstEnemyStartingRect, entTexture, 1, 5, 100, firstEnemyAttackRangeRect);
             chain = new ChainSaw(mainCharacterStartingX, mainCharacterStartingY, chainRect, chainTexture, 0, 2, 50);
+
+            firstLevel = new Level(firstEnemy);
+            currentFightScene = firstLevel.Encounter();
 
             mainMenu.getsetImage = mainMenuImage;
             controls.getsetImage = controlsMenuImage;
@@ -245,8 +248,64 @@ namespace Project_Forest
                     }
                     break;
                 case GameStates.Game:
+                    if (view.State == ViewStates.Moving)
+                    {
+                        switch (playerCharacter.State)
+                        {
+                            case CharacterStates.FaceRight:
+                                if (kbState.IsKeyDown(Keys.Right))
+                                {
+                                    playerCharacter.State = CharacterStates.WalkRight;
+                                }
+                                if (kbState.IsKeyDown(Keys.Left))
+                                {
+                                    playerCharacter.State = CharacterStates.WalkLeft;
+                                }
+                                break;
+                            case CharacterStates.FaceLeft:
+                                if (kbState.IsKeyDown(Keys.Right))
+                                {
+                                    playerCharacter.State = CharacterStates.WalkRight;
+                                }
+                                if (kbState.IsKeyDown(Keys.Left))
+                                {
+                                    playerCharacter.State = CharacterStates.WalkLeft;
+                                }
+                                break;
+                            case CharacterStates.WalkRight:
+                                playerCharacter.Direction = 1;
+                                playerCharacter.X += playerCharacter.Speed;
+                                view.X += playerCharacter.Speed;
+                                if (kbState.IsKeyUp(Keys.Right))
+                                {
+                                    playerCharacter.State = CharacterStates.FaceRight;
+                                }
+                                break;
+                            case CharacterStates.WalkLeft:
+                                playerCharacter.Direction = 0;
+                                playerCharacter.X -= playerCharacter.Speed;
+                                view.X += playerCharacter.Speed;
+                                if (kbState.IsKeyUp(Keys.Left))
+                                {
+                                    playerCharacter.State = CharacterStates.FaceLeft;
+                                }
+                                break;
+                            case CharacterStates.MeleeAttack:
+                                break;
+                        }
+                        if (view.X >= firstLevel.CurrentFightSceneX)
+                        {
+                            view.X = firstLevel.CurrentFightSceneX;
+                            currentFightScene = firstLevel.Encounter();
+                            view.State = ViewStates.Stationary;
+                        }
+                    }
                     if (view.State == ViewStates.Stationary)
                     {
+                        if (currentFightScene.Enemies.Count < 1)
+                        {
+                            view.State = ViewStates.Moving;
+                        }
                         switch (playerCharacter.State)
                         {
                             case CharacterStates.FaceRight:
@@ -288,70 +347,136 @@ namespace Project_Forest
                             case CharacterStates.MeleeAttack:
                                 break;
                         }
-                        switch (firstEnemy.State)
+                        foreach (Enemy enemy in currentFightScene.Enemies)
                         {
-                            case CharacterStates.FaceRight:
-                                if (playerCharacter.X > firstEnemy.X && !firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect))
-                                {
-                                    firstEnemy.State = CharacterStates.WalkRight;
-                                }
-                                if (playerCharacter.X < firstEnemy.X && !firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect))
-                                {
-                                    firstEnemy.State = CharacterStates.WalkLeft;
-                                }
-                                break;
-                            case CharacterStates.FaceLeft:
-                                if (playerCharacter.X > firstEnemy.X && !firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect))
-                                {
-                                    firstEnemy.State = CharacterStates.WalkRight;
-                                }
-                                if (playerCharacter.X < firstEnemy.X && !firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect))
-                                {
-                                    firstEnemy.State = CharacterStates.WalkLeft;
-                                }
-                                break;
-                            case CharacterStates.WalkRight:
-                                firstEnemy.Move(playerCharacter);
-                                localEnemyAttackRanRect.X += firstEnemy.Speed;
-                                firstEnemy.AtkRanRect = localEnemyAttackRanRect;
-                                if (firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect))
-                                {
-                                    firstEnemy.State = CharacterStates.MeleeAttack;
-                                }
-                                break;
-                            case CharacterStates.WalkLeft:
-                                firstEnemy.Move(playerCharacter);
-                                localEnemyAttackRanRect.X -= firstEnemy.Speed;
-                                firstEnemy.AtkRanRect = localEnemyAttackRanRect;
-                                if (firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect))
-                                {
-                                    firstEnemy.State = CharacterStates.MeleeAttack;
-                                }
-                                break;
-                            case CharacterStates.MeleeAttack:
-                                if (startedAttacking == false)
-                                {
-                                    firstEnemy.Attack(playerCharacter);
-                                    startingAttackTime = (int)gameTime.TotalGameTime.TotalSeconds;
-                                    startedAttacking = true;
-                                }
-                                else if (startingAttackTime + 3 == (int)gameTime.TotalGameTime.TotalSeconds)
-                                {
-                                    startedAttacking = false;
-                                    if (!firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect) && playerCharacter.X < firstEnemy.X)
+                            switch (enemy.State)
+                            {
+                                case CharacterStates.FaceRight:
+                                    if (playerCharacter.X > enemy.X && !enemy.AtkRanRect.Intersects(playerCharacter.CoRect))
                                     {
-                                        firstEnemy.State = CharacterStates.WalkLeft;
+                                        enemy.State = CharacterStates.WalkRight;
                                     }
-                                    if (!firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect) && playerCharacter.X > firstEnemy.X)
+                                    if (playerCharacter.X < enemy.X && !enemy.AtkRanRect.Intersects(playerCharacter.CoRect))
                                     {
-                                        firstEnemy.State = CharacterStates.WalkRight;
+                                        enemy.State = CharacterStates.WalkLeft;
                                     }
-                                }
-                                break;
+                                    break;
+                                case CharacterStates.FaceLeft:
+                                    if (playerCharacter.X > enemy.X && !enemy.AtkRanRect.Intersects(playerCharacter.CoRect))
+                                    {
+                                        enemy.State = CharacterStates.WalkRight;
+                                    }
+                                    if (playerCharacter.X < enemy.X && !enemy.AtkRanRect.Intersects(playerCharacter.CoRect))
+                                    {
+                                        enemy.State = CharacterStates.WalkLeft;
+                                    }
+                                    break;
+                                case CharacterStates.WalkRight:
+                                    enemy.Move(playerCharacter);
+                                    localEnemyAttackRanRect.X += enemy.Speed;
+                                    enemy.AtkRanRect = localEnemyAttackRanRect;
+                                    if (enemy.AtkRanRect.Intersects(playerCharacter.CoRect))
+                                    {
+                                        enemy.State = CharacterStates.MeleeAttack;
+                                    }
+                                    break;
+                                case CharacterStates.WalkLeft:
+                                    enemy.Move(playerCharacter);
+                                    localEnemyAttackRanRect.X -= enemy.Speed;
+                                    enemy.AtkRanRect = localEnemyAttackRanRect;
+                                    if (enemy.AtkRanRect.Intersects(playerCharacter.CoRect))
+                                    {
+                                        enemy.State = CharacterStates.MeleeAttack;
+                                    }
+                                    break;
+                                case CharacterStates.MeleeAttack:
+                                    if (startedAttacking == false)
+                                    {
+                                        enemy.Attack(playerCharacter);
+                                        startingAttackTime = (int)gameTime.TotalGameTime.TotalSeconds;
+                                        startedAttacking = true;
+                                    }
+                                    else if (startingAttackTime + 3 == (int)gameTime.TotalGameTime.TotalSeconds)
+                                    {
+                                        startedAttacking = false;
+                                        if (!enemy.AtkRanRect.Intersects(playerCharacter.CoRect) && playerCharacter.X < enemy.X)
+                                        {
+                                            enemy.State = CharacterStates.WalkLeft;
+                                        }
+                                        if (!enemy.AtkRanRect.Intersects(playerCharacter.CoRect) && playerCharacter.X > enemy.X)
+                                        {
+                                            enemy.State = CharacterStates.WalkRight;
+                                        }
+                                    }
+                                    break;
+                            }
                         }
+                        //switch (firstEnemy.State)
+                        //{
+                        //    case CharacterStates.FaceRight:
+                        //        if (playerCharacter.X > firstEnemy.X && !firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect))
+                        //        {
+                        //            firstEnemy.State = CharacterStates.WalkRight;
+                        //        }
+                        //        if (playerCharacter.X < firstEnemy.X && !firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect))
+                        //        {
+                        //            firstEnemy.State = CharacterStates.WalkLeft;
+                        //        }
+                        //        break;
+                        //    case CharacterStates.FaceLeft:
+                        //        if (playerCharacter.X > firstEnemy.X && !firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect))
+                        //        {
+                        //            firstEnemy.State = CharacterStates.WalkRight;
+                        //        }
+                        //        if (playerCharacter.X < firstEnemy.X && !firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect))
+                        //        {
+                        //            firstEnemy.State = CharacterStates.WalkLeft;
+                        //        }
+                        //        break;
+                        //    case CharacterStates.WalkRight:
+                        //        firstEnemy.Move(playerCharacter);
+                        //        localEnemyAttackRanRect.X += firstEnemy.Speed;
+                        //        firstEnemy.AtkRanRect = localEnemyAttackRanRect;
+                        //        if (firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect))
+                        //        {
+                        //            firstEnemy.State = CharacterStates.MeleeAttack;
+                        //        }
+                        //        break;
+                        //    case CharacterStates.WalkLeft:
+                        //        firstEnemy.Move(playerCharacter);
+                        //        localEnemyAttackRanRect.X -= firstEnemy.Speed;
+                        //        firstEnemy.AtkRanRect = localEnemyAttackRanRect;
+                        //        if (firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect))
+                        //        {
+                        //            firstEnemy.State = CharacterStates.MeleeAttack;
+                        //        }
+                        //        break;
+                        //    case CharacterStates.MeleeAttack:
+                        //        if (startedAttacking == false)
+                        //        {
+                        //            firstEnemy.Attack(playerCharacter);
+                        //            startingAttackTime = (int)gameTime.TotalGameTime.TotalSeconds;
+                        //            startedAttacking = true;
+                        //        }
+                        //        else if (startingAttackTime + 3 == (int)gameTime.TotalGameTime.TotalSeconds)
+                        //        {
+                        //            startedAttacking = false;
+                        //            if (!firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect) && playerCharacter.X < firstEnemy.X)
+                        //            {
+                        //                firstEnemy.State = CharacterStates.WalkLeft;
+                        //            }
+                        //            if (!firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect) && playerCharacter.X > firstEnemy.X)
+                        //            {
+                        //                firstEnemy.State = CharacterStates.WalkRight;
+                        //            }
+                        //        }
+                        //        break;
+                        //}
                     }
                     break;
             }
+
+            currentFightScene.UpdateList();
 
             if (playerCharacter.HP < 1)
             {
@@ -364,7 +489,16 @@ namespace Project_Forest
 
             entities.Clear();
             entities.Add(playerCharacter);
-            entities.Add(firstEnemy);
+            //entities.Add(firstEnemy);
+            if (currentFightScene.Enemies.Count > 0)
+            {
+                foreach (Enemy enemy in currentFightScene.Enemies)
+                {
+                    entities.Add(enemy);
+                } 
+            }
+
+            Console.WriteLine("ViewState: " + view.State);
 
             base.Update(gameTime);
         }

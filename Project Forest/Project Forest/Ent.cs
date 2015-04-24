@@ -9,8 +9,21 @@ namespace Project_Forest
 {
     class Ent : GroundEnemy
     {
+        public static Texture2D staticTexture;
+        public static int direction;
+        public static Rectangle boundsRect;
+        public static Rectangle rangeRect;
+        public static int xPosition;
+        public static int yPosition;
+
         public Ent(int xpos, int ypos, Rectangle rect, Texture2D text, int direct, int speed, int health, Rectangle range)
             :base(xpos,ypos,rect,text,direct,speed,health,range)
+        {
+
+        }
+
+        public Ent(int speed, int health)
+            :base(xPosition, yPosition, boundsRect, staticTexture, direction, speed, health, rangeRect)
         {
 
         }
