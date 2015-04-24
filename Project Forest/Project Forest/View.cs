@@ -61,66 +61,73 @@ namespace Project_Forest
             {
                 if (entity is Movable)
                 {
-                    Movable movable = entity as Movable;
-                    if (movable is Damaging)
+                    Movable movable = entity as Movable; 
+                    if (movable is Enemy)
                     {
-                        Damaging damaging = movable as Damaging;
 
-                        if (damaging.Active)
+                        Enemy enemy = movable as Enemy;
+
+                        if (enemy is Ent)
                         {
-                            if (damaging is ChainSaw)
-                            {
-                                ChainSaw chain = damaging as ChainSaw;
 
-                                Rectangle sourceRect = new Rectangle(0, 0, chain.Texture.Width, chain.Texture.Height);
-                                if (chain.Direction == 1)
+                            Ent ent = enemy as Ent;
+
+                            if (ent.Direction == 0)
+                            {
+
+                                sb.Draw(ent.Texture, ent.CoRect, Color.White);
+
+                            }
+
+                            else
+                            {
+
+                                Rectangle sourceRect = new Rectangle(0, 0, ent.Texture.Width, ent.Texture.Height);
+
+                                sb.Draw(ent.Texture, ent.CoRect, sourceRect, Color.White, 0.0f, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
+
+                            }
+
+                        }
+
+                    }
+
+                    else if (movable.Direction == 0)
+                    {
+
+                        if (movable is Damaging)
+                        {
+                            Damaging damaging = movable as Damaging;
+
+                            if (damaging.Active)
+                            {
+                                if (damaging is ChainSaw)
                                 {
+                                    ChainSaw chain = damaging as ChainSaw;
+
+                                    Rectangle sourceRect = new Rectangle(0, 0, chain.Texture.Width, chain.Texture.Height);
                                     sb.Draw(chain.Texture, chain.CoRect, sourceRect, Color.White, chain.Rotation, new Vector2(0, 0), SpriteEffects.FlipHorizontally, 0f);
                                 }
                                 else
                                 {
-                                    sb.Draw(chain.Texture, chain.CoRect, sourceRect, Color.White, chain.Rotation, new Vector2(0, 0), SpriteEffects.None, 0f);
+                                    sb.Draw(damaging.Texture, damaging.CoRect, Color.White);
                                 }
-                            }
-                            else 
-                            {
-                                sb.Draw(damaging.Texture, damaging.CoRect, Color.White);
-                            }
-                        }
-                        else
-                        {
-
-                        }
-                    }
-                    else if (movable.Direction == 1)
-                    if (movable is Enemy)
-                    {
-                        Enemy enemy = movable as Enemy;
-                        if (enemy is Ent)
-                        {
-                            Ent ent = enemy as Ent;
-                            if (ent.Direction == 0)
-                            {
-                                sb.Draw(ent.Texture, ent.CoRect, Color.White);
                             }
                             else
                             {
-                                Rectangle sourceRect = new Rectangle(0, 0, ent.Texture.Width, ent.Texture.Height);
-                                sb.Draw(ent.Texture, ent.CoRect, sourceRect, Color.White, 0.0f, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
-                            }
+
+                            } 
+                        }
+                        else
+                        {
+                            Rectangle sourceRect = new Rectangle(0, 0, movable.Texture.Width, movable.Texture.Height);
+                            sb.Draw(movable.Texture, movable.CoRect, sourceRect, Color.White, 0.0f, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
                         }
                     }
-                    else if (movable.Direction == 0)
+                    else if (movable.Direction == 1)
                     {
                         sb.Draw(movable.Texture, movable.CoRect, Color.White);
                     }
-                    else
-                    {
-                        Rectangle sourceRect = new Rectangle(0,0, movable.Texture.Width, movable.Texture.Height);
-                        sb.Draw(movable.Texture, movable.CoRect, sourceRect, Color.White, 0.0f, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
-                    }
-                    
- 
                 }
                 if (entity is Obstacle)
                 {

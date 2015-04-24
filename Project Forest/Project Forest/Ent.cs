@@ -33,7 +33,7 @@ namespace Project_Forest
 
         public override void Attack(MainCharacter player)
         {
-            player.HP -= 20;
+            player.HP -= 5;
         }
     }
 }
