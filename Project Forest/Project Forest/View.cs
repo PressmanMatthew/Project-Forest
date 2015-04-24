@@ -11,31 +11,12 @@ namespace Project_Forest
     {
         List<IEntity> entities; //List of entities to draw to the screen
         ViewStates state; //The current state of the view
-        Rectangle currentLevelView;
 
         //Accessor and mutator for state
         public ViewStates State
         {
             get { return state; }
             set { state = value; }
-        }
-
-        public Rectangle CurrentLevelView
-        {
-            get { return currentLevelView; }
-            set { currentLevelView = value; }
-        }
-
-        public int X
-        {
-            get { return currentLevelView.X; }
-            set { currentLevelView.X = value; }
-        }
-
-        public int Y
-        {
-            get { return currentLevelView.Y; }
-            set { currentLevelView.Y = value; }
         }
 
         //Constructor that makes objects of the fields
