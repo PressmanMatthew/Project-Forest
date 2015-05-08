@@ -24,11 +24,11 @@ namespace Project_Forest
         {
             if (X > player.X && player.CoRect.Intersects(AtkRanRect) != true)
             {
-                X--;
+                X -= Speed;
             }
             if (X < player.X && player.CoRect.Intersects(AtkRanRect) != true)
             {
-                X++;
+                X += Speed;
             }
         }
 
