@@ -24,6 +24,7 @@ namespace Project_Forest
     {
         Menu,
         Game,
+        Pause,
     }
 
     enum MenuStates
@@ -31,6 +32,7 @@ namespace Project_Forest
         MainMenu,
         Controls,
         Credits,
+        PauseMenu,
     }
 
     enum ArrowSelection
@@ -45,6 +47,9 @@ namespace Project_Forest
         RangeAttack,
         MoveLeft,
         MoveRight,
+        Resume,
+        MainMenu,
+
 
     }
 }

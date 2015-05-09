@@ -72,6 +72,7 @@
     <Compile Include="MenuOption.cs" />
     <Compile Include="Movable.cs" />
     <Compile Include="Obstacle.cs" />
+    <Compile Include="PauseMenu.cs" />
     <Compile Include="PowerUp.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="IProjectile.cs" />
@@ -112,6 +113,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\MainMenu.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Pause.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
