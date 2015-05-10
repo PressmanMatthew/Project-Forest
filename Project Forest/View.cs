@@ -79,7 +79,7 @@ namespace Project_Forest
                             }
                         }
                     }
-                    else if (movable is Damaging)
+                    if (movable is Damaging)
                     {
                         Damaging damaging = movable as Damaging;
 
@@ -148,7 +148,7 @@ namespace Project_Forest
         }
 
 
-        public void DrawOverlaw(SpriteBatch sb, SpriteFont font, string hp)
+        public void DrawOverlay(SpriteBatch sb, SpriteFont font, string hp)
         {
             sb.DrawString(font, "HP: " + hp, new Vector2(0, 0), Color.Black);
         }

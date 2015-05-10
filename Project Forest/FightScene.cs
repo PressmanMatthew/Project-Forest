@@ -29,7 +29,7 @@ namespace Project_Forest
         {
             foreach (Enemy e in enemies)
             {
-                if (e.HP == 0)
+                if (e.HP <= 0)
                 {
                     enemies.Remove(e);
                 }

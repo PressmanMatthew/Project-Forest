@@ -102,6 +102,7 @@ namespace Project_Forest
  
             entities = new List<IEntity>();
             view = new View();
+            view.State = ViewStates.Stationary;
 
             startedAttacking = false;
             gameOver = false;
@@ -196,6 +197,7 @@ namespace Project_Forest
 
             switch (gameState)
             {
+                #region Menu State
                 //if gamestate is menu do these things
                 case GameStates.Menu:
                     switch (menuState)
@@ -250,7 +252,9 @@ namespace Project_Forest
 
                     }
                     break;
+                #endregion
                 case GameStates.Game:
+                    #region View Moving
                     if (view.State == ViewStates.Moving)
                     {
 
@@ -401,8 +405,11 @@ namespace Project_Forest
                         }
 
                     }
+#endregion
+                    #region View Stationary
                     if (view.State == ViewStates.Stationary)
                     {
+                        #region Player Finite State Machine
                         switch (playerCharacter.State)
                         {
                             case CharacterStates.FaceRight:
@@ -476,7 +483,7 @@ namespace Project_Forest
                                     {
                                         if (playerCharacter.Chainsaw.IsColliding(enemy))
                                         {
-                                            playerCharacter.Attack(firstEnemy);
+                                            playerCharacter.Attack(enemy);
                                         }
                                     }
                                     startingAttackTime = (int)gameTime.TotalGameTime.TotalSeconds;
@@ -499,6 +506,8 @@ namespace Project_Forest
                                 }
                                 break;
                         }
+                        #endregion
+                        #region Enemy State Machine
                         foreach (Enemy enemy in currentFightScene.Enemies)
                         {
                             switch (enemy.State)
@@ -543,15 +552,20 @@ namespace Project_Forest
                                     }
                                     break;
                                 case CharacterStates.MeleeAttack:
-                                    if (startedAttacking == false)
+                                    int enemyStartingAttackTime = 0;
+                                    bool enemyStartedAttacking = false;
+                                    if (enemyStartedAttacking == false)
                                     {
-                                        enemy.Attack(playerCharacter);
-                                        startingAttackTime = (int)gameTime.TotalGameTime.TotalSeconds;
-                                        startedAttacking = true;
+                                        if (enemy.AtkRanRect.Intersects(playerCharacter.CoRect))
+                                        {
+                                            enemy.Attack(playerCharacter);
+                                        }
+                                        enemyStartingAttackTime = (int)gameTime.TotalGameTime.TotalSeconds;
+                                        enemyStartedAttacking = true;
                                     }
-                                    else if (startingAttackTime + 3 == (int)gameTime.TotalGameTime.TotalSeconds)
+                                    else if (enemyStartingAttackTime + 3 == (int)gameTime.TotalGameTime.TotalSeconds)
                                     {
-                                        startedAttacking = false;
+                                        enemyStartedAttacking = false;
                                         if (!enemy.AtkRanRect.Intersects(playerCharacter.CoRect) && playerCharacter.X < enemy.X)
                                         {
                                             enemy.State = CharacterStates.WalkLeft;
@@ -564,6 +578,8 @@ namespace Project_Forest
                                     break;
                             }
                         }
+                        #endregion
+                        #region Old Code
                         //switch (firstEnemy.State)
                         //{
                         //    case CharacterStates.FaceRight:
@@ -625,7 +641,9 @@ namespace Project_Forest
                         //        }
                         //        break;
                         //}
+#endregion
                     }
+                    #endregion
                     break;
             }
 
@@ -642,7 +660,7 @@ namespace Project_Forest
 
             entities.Clear();
             entities.Add(playerCharacter);
-            entities.Add(playerCharacter.Chainsaw);
+            entities.Add(chain);
             //entities.Add(firstEnemy);
 
             if (currentFightScene.Enemies.Count > 0)
@@ -670,7 +688,7 @@ namespace Project_Forest
  
             view.DrawEntities(spriteBatch, entities);
 
-            view.DrawOverlaw(spriteBatch, arial, playerCharacter.HP.ToString());
+            view.DrawOverlay(spriteBatch, arial, playerCharacter.HP.ToString());
 
             view.DrawMenu(spriteBatch, gameState, currentMenu);
 

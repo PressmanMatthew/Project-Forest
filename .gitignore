@@ -1,3 +1,6 @@
 *.suo
 Project Forest/Project Forest/bin
 Project Forest/Project Forest/obj
+Project Forest/bin
+Project Forest/obj
+Project Forest/bin/Windows/Debug/Project Forest.exe

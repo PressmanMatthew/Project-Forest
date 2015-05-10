@@ -42,7 +42,7 @@ namespace Project_Forest
             entX = ent.X;
             entY = ent.Y;
 
-            AddFightScene(4);
+            AddFightScene(2);
             AddFightScene(4);
             AddFightScene(6);
             AddFightScene(8);
@@ -54,7 +54,7 @@ namespace Project_Forest
             for (int i = 0; i < difficulty/2; i++)
             {
                 //use how big diff is to scale the enemies difficulties
-                Ent e = new Ent(entX - (25 * difficulty), entY, entRect, entTexture, 1, 5, 100, entAttackRange);
+                Ent e = new Ent(entX - (25 * i), entY, entRect, entTexture, 1, 5, 100, entAttackRange);
                 f.AddEnemy(e);
             }
 
