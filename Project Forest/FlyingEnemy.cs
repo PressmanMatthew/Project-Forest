@@ -29,7 +29,7 @@ namespace Project_Forest
             }
         }
 
-        public void Fire(MainCharacter player)
+        public override void Fire(MainCharacter player)
         {
             if (player.X + 5 == X || player.X - 5 == X)//Deteremine best way
             {

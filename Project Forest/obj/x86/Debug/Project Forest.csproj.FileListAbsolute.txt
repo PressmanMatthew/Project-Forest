@@ -165,3 +165,5 @@ E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Fores
 E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\obj\x86\Debug\Project Forest.exe
 E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\obj\x86\Debug\Project Forest.pdb
 E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\Content\ArrowRight.png
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Content\ArrowRight.png
+D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Content\PauseMenu.png

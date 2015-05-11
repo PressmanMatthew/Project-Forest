@@ -32,12 +32,17 @@ namespace Project_Forest
             }
         }
 
-        public void Fire(MainCharacter player)
+        public virtual void Fire(MainCharacter player)
         {
             if (player.CoRect.Intersects(AtkRanRect))
             {
                 bullet = new EnemyBullet(X, Y, bullet.CoRect, bullet.Texture, Direction,8,2);
             }
+        }
+
+        public override void Attack(MainCharacter player)
+        {
+            throw new NotImplementedException();
         }
     }
 }

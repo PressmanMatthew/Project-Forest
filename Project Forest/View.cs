@@ -142,7 +142,7 @@ namespace Project_Forest
             if (gState == GameStates.Menu || gState == GameStates.Pause)
             {
 
-                sb.Draw(cMenu.getsetImage, new Rectangle(0, 0, cMenu.getsetImage.Width, cMenu.getsetImage.Height), Color.White);
+                sb.Draw(cMenu.getsetImage, new Rectangle(225, 0, cMenu.getsetImage.Width - (cMenu.getsetImage.Width / 8), cMenu.getsetImage.Height - (cMenu.getsetImage.Height / 8)), Color.White);
                 sb.Draw(arrowImage, arrowRect, Color.White);
             }
 
