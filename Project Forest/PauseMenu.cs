@@ -8,9 +8,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Project_Forest
 {
-    class ControlsMenu:Menu
+    class PauseMenu:Menu
     {
-        public ControlsMenu(Texture2D image, List<MenuOption> menuOptions)
+        public PauseMenu(Texture2D image, List<MenuOption> menuOptions)
             : base(image, menuOptions)
         {
 

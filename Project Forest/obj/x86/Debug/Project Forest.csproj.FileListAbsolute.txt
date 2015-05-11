@@ -130,3 +130,38 @@ D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debu
 D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.RawInput.xml
 D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct3D9.xml
 D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\obj\x86\Debug\Project Forest.csprojResolveAssemblyReference.cache
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\Content\ChainSaw.png
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\Content\ControlsMenu.png
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\Content\CreditsMenu.png
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\Content\Ent 200.png
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\Content\Ground.png
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\Content\Main Character200.png
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\Content\MainMenu.png
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\Content\Arial14.xnb
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\Content\PauseMenu.png
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\Project Forest.exe
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\Project Forest.pdb
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\MonoGame.Framework.dll
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.MediaFoundation.dll
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.dll
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.XAudio2.dll
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct3D11.dll
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.DXGI.dll
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct2D1.dll
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\Lidgren.Network.dll
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.XInput.dll
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.RawInput.dll
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct3D9.dll
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.MediaFoundation.xml
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.xml
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.XAudio2.xml
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct3D11.xml
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.DXGI.xml
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct2D1.xml
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.XInput.xml
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.RawInput.xml
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct3D9.xml
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\obj\x86\Debug\Project Forest.csprojResolveAssemblyReference.cache
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\obj\x86\Debug\Project Forest.exe
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\obj\x86\Debug\Project Forest.pdb
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\Content\ArrowRight.png

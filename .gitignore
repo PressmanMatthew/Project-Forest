@@ -4,3 +4,25 @@ Project Forest/Project Forest/obj
 Project Forest/bin
 Project Forest/obj
 Project Forest/bin/Windows/Debug/Project Forest.exe
+Project Forest/bin/Windows/Debug/Project Forest.exe
+Project Forest/bin/Windows/Debug/Project Forest.pdb
+Project Forest/bin/Windows/Debug/SharpDX.Direct2D1.xml
+Project Forest/bin/Windows/Debug/SharpDX.Direct3D11.xml
+Project Forest/bin/Windows/Debug/SharpDX.Direct3D9.xml
+Project Forest/bin/Windows/Debug/SharpDX.DXGI.xml
+Project Forest/bin/Windows/Debug/SharpDX.MediaFoundation.xml
+Project Forest/bin/Windows/Debug/SharpDX.RawInput.xml
+Project Forest/bin/Windows/Debug/SharpDX.XAudio2.xml
+Project Forest/bin/Windows/Debug/SharpDX.XInput.xml
+Project Forest/bin/Windows/Debug/SharpDX.xml
+Project Forest/obj/x86/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+Project Forest/obj/x86/Debug/Project Forest.csproj.FileListAbsolute.txt
+Project Forest/obj/x86/Debug/Project Forest.csprojResolveAssemblyReference.cache
+Project Forest/obj/x86/Debug/Project Forest.exe
+Project Forest/obj/x86/Debug/Project Forest.pdb
+*.cache
+Project Forest/obj/x86/Release/DesignTimeResolveAssemblyReferencesInput.cache
+*.pdb
+*.txt
+*.xml
+*.sln

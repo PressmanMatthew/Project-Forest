@@ -13,7 +13,9 @@ namespace Project_Forest
         //texture fields
         private Texture2D image;
         //array
-        protected List<Keys> keys;
+        protected List<MenuOption> menuOptions;
+
+        protected ArrowSelection currentMenuSelection;
 
         //properties
         public Texture2D getsetImage
@@ -22,18 +24,24 @@ namespace Project_Forest
             set { image = value; }
         }
 
-        public List<Keys> getKeys
+        public List<MenuOption> MenuOptions
         {
-            get { return keys; }
+            get { return menuOptions; }
+        }
+
+        public ArrowSelection CurrentMenuSelection
+        {
+            get { return currentMenuSelection; }
+            set { currentMenuSelection = value; }
         }
 
         //constructor
-        public Menu(Texture2D image, List<Keys> keys)
+        public Menu(Texture2D image, List<MenuOption> menuOptions)
         {
             this.image = image;
-            this.keys = keys;
+            this.menuOptions = menuOptions;
         }
-        
-        
+
+
     }
 }

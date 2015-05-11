@@ -136,15 +136,16 @@ namespace Project_Forest
             sb.Draw(ground, new Vector2(x, y), Color.White);
         }
 
-        public void DrawMenu(SpriteBatch sb, GameStates gState, Menu cMenu)
+        public void DrawMenu(SpriteBatch sb, GameStates gState, Menu cMenu, Rectangle arrowRect, Texture2D arrowImage)
         {
             //if state is in menu state
-            if (gState == GameStates.Menu)
+            if (gState == GameStates.Menu || gState == GameStates.Pause)
             {
 
                 sb.Draw(cMenu.getsetImage, new Rectangle(0, 0, cMenu.getsetImage.Width, cMenu.getsetImage.Height), Color.White);
+                sb.Draw(arrowImage, arrowRect, Color.White);
             }
- 
+
         }
 
 
