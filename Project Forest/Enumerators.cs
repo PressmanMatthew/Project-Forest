@@ -49,7 +49,12 @@ namespace Project_Forest
         MoveRight,
         Resume,
         MainMenu,
+    }
 
-
+    enum EnemyStates
+    {
+        InActive,
+        Active,
+        Attacking
     }
 }

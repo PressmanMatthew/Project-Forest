@@ -31,7 +31,7 @@ namespace Project_Forest
 
         public override void Fire(MainCharacter player)
         {
-            if (player.X + 5 == X || player.X - 5 == X)//Deteremine best way
+            if (player.CoRect.Intersects(AtkRanRect))//Deteremine best way
             {
                 Bullet = new EnemyBullet(X, Y, Bullet.CoRect, Bullet.Texture, 1, 8, 2);//Note decide what number direction is down
             }
