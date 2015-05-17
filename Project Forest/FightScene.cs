@@ -27,11 +27,16 @@ namespace Project_Forest
         }
         public void UpdateList()
         {
-            foreach (Enemy e in enemies)
+            if (enemies.Count > 0)
             {
-                if (e.HP <= 0)
+                foreach (Enemy e in enemies)
                 {
-                    enemies.Remove(e);
+                    if (e.HP <= 0)
+                    {
+                        e.X = -100;
+                        e.Y = -100;
+                        enemies.Remove(e);
+                    }
                 }
             }
         }

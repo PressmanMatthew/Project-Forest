@@ -76,6 +76,8 @@ namespace Project_Forest
 
         bool startedAttacking;
         int startingAttackTime;
+        int enemyStartingAttackTime;
+        bool enemyStartedAttacking;
         bool gameOver;
 
         KeyboardState previousKbState;
@@ -112,6 +114,8 @@ namespace Project_Forest
             view.State = ViewStates.Stationary;
 
             startedAttacking = false;
+            enemyStartingAttackTime = 0;
+            enemyStartedAttacking = false;
             gameOver = false;
 
             //set gamestate to menu state
@@ -717,8 +721,6 @@ namespace Project_Forest
                                     }
                                     break;
                                 case CharacterStates.MeleeAttack:
-                                    int enemyStartingAttackTime = 0;
-                                    bool enemyStartedAttacking = false;
                                     if (enemyStartedAttacking == false)
                                     {
                                         if (enemy.AtkRanRect.Intersects(playerCharacter.CoRect))
@@ -990,7 +992,12 @@ namespace Project_Forest
                 this.Exit();
             }
 
-            Console.WriteLine(menuState + ", " + currentMenu.CurrentMenuSelection);
+            int i = 0;
+            foreach (Enemy enemy in currentFightScene.Enemies)
+            {
+                Console.WriteLine(i + ": X - " + enemy.X + "; Y - " + enemy.Y);
+                i++;
+            }
 
             entities.Clear();
             entities.Add(playerCharacter);
