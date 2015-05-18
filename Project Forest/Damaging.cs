@@ -14,8 +14,8 @@ namespace Project_Forest
         
         public int Dmg
         {
-            get { return Dmg; }
-            set { Dmg = value; }
+            get { return dmg; }
+            set { dmg = value; }
         }
 
         public bool Active

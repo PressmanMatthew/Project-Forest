@@ -130,7 +130,6 @@ D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debu
 D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.RawInput.xml
 D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct3D9.xml
 D:\Users\mrp3362\Documents\GitHub\Project-Forest\Project Forest\obj\x86\Debug\Project Forest.csprojResolveAssemblyReference.cache
-E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\Content\ChainSaw.png
 E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\Content\ControlsMenu.png
 E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\Content\CreditsMenu.png
 E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\Content\Ent 200.png
@@ -237,3 +236,6 @@ C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.D
 C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.XInput.xml
 C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.RawInput.xml
 C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct3D9.xml
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\Content\Background.png
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\Content\ChainSaw200.png
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\Content\Fire 150x87.png

@@ -12,6 +12,7 @@ namespace Project_Forest
         WalkRight,
         WalkLeft,
         MeleeAttack,
+        RangedAttack,
     }
 
     public enum ViewStates

@@ -49,6 +49,7 @@ namespace Project_Forest
         Ent firstEnemy;
 
         ChainSaw chain;
+        Flame fire;
 
         List<IEntity> entities;
 
@@ -59,7 +60,9 @@ namespace Project_Forest
         Texture2D entTexture;
         Texture2D mainTexture;
         Texture2D chainTexture;
+        Texture2D flameTexture;
         Texture2D groundTexture;
+        Texture2D backgroundTexture;
         Texture2D menuSelectionArrowTexture;
         SpriteFont arial;
 
@@ -72,6 +75,7 @@ namespace Project_Forest
         Rectangle firstEnemyStartingRect;
         Rectangle firstEnemyAttackRangeRect;
         Rectangle chainRect;
+        Rectangle flameRect;
         Rectangle localEnemyAttackRanRect;
 
         bool startedAttacking;
@@ -103,9 +107,10 @@ namespace Project_Forest
             mainCharacterStartingRect = new Rectangle(mainCharacterStartingX, mainCharacterStartingY, 72, 100);
 
             firstEnemyStartingX = ((GraphicsDevice.Viewport.Width / 3) * 2 + 50);
-            firstEnemyStartingY = (GraphicsDevice.Viewport.Height / 6) * 3;
-            firstEnemyStartingRect = new Rectangle(firstEnemyStartingX, firstEnemyStartingY, 120, 70);
+            firstEnemyStartingY = mainCharacterStartingY + mainCharacterStartingRect.Height - 117;
+            firstEnemyStartingRect = new Rectangle(firstEnemyStartingX, firstEnemyStartingY, 200, 117);
             chainRect = new Rectangle(mainCharacterStartingX + 30, mainCharacterStartingY + 40, 50, 25);
+            flameRect = new Rectangle(mainCharacterStartingX + 30, mainCharacterStartingY + 40, 150, 87);
             firstEnemyAttackRangeRect = new Rectangle(firstEnemyStartingX - 10, firstEnemyStartingY - 10, firstEnemyStartingRect.Width + 20, firstEnemyStartingRect.Height + 20);
             localEnemyAttackRanRect = firstEnemyAttackRangeRect;
  
@@ -180,8 +185,10 @@ namespace Project_Forest
  
             mainTexture = this.Content.Load<Texture2D>("Main Character200");
             entTexture = this.Content.Load<Texture2D>("Ent 200");
-            chainTexture = this.Content.Load<Texture2D>("ChainSaw");
+            chainTexture = this.Content.Load<Texture2D>("ChainSaw200");
+            flameTexture = this.Content.Load<Texture2D>("Fire 150x87");
             groundTexture = this.Content.Load<Texture2D>("Ground");
+            backgroundTexture = this.Content.Load<Texture2D>("Background");
 
             //loading textures (INSERT BACKGROUND FILE NAME and Menu FILE NAME)
             mainMenuImage = this.Content.Load<Texture2D>("MainMenu");
@@ -192,10 +199,13 @@ namespace Project_Forest
 
             arial = this.Content.Load<SpriteFont>("Arial14");
 
-            chain = new ChainSaw(mainCharacterStartingX, mainCharacterStartingY, chainRect, chainTexture, 0, 2, 50);
+            chain = new ChainSaw(mainCharacterStartingX + mainCharacterStartingRect.Width - 20, mainCharacterStartingY, chainRect, chainTexture, 0, 2, 50);
             chain.Active = false;
 
-            playerCharacter = new MainCharacter(mainCharacterStartingX, mainCharacterStartingY, mainCharacterStartingRect, mainTexture, 1, 10, 100, chain);
+            fire = new Flame(mainCharacterStartingX + mainCharacterStartingRect.Width - 20, mainCharacterStartingY-200, flameRect, flameTexture, 0, 2, 50);
+            fire.Active = false;
+
+            playerCharacter = new MainCharacter(mainCharacterStartingX, mainCharacterStartingY, mainCharacterStartingRect, mainTexture, 1, 10, 100, chain, fire);
             firstEnemy = new Ent(firstEnemyStartingX, firstEnemyStartingY, firstEnemyStartingRect, entTexture, 1, 5, 100, firstEnemyAttackRangeRect);
 
             firstLevel = new Level(firstEnemy);
@@ -450,7 +460,10 @@ namespace Project_Forest
                                 {
                                     playerCharacter.State = CharacterStates.MeleeAttack;
                                 }
-
+                                if (kbState.IsKeyDown(Keys.X))
+                                {
+                                    playerCharacter.State = CharacterStates.RangedAttack;
+                                }
                                 break;
 
                             case CharacterStates.FaceLeft:
@@ -473,7 +486,10 @@ namespace Project_Forest
                                 {
                                     playerCharacter.State = CharacterStates.MeleeAttack;
                                 }
-
+                                if (kbState.IsKeyDown(Keys.X))
+                                {
+                                    playerCharacter.State = CharacterStates.RangedAttack;
+                                }
                                 break;
 
                             case CharacterStates.WalkRight:
@@ -496,7 +512,10 @@ namespace Project_Forest
                                 {
                                     playerCharacter.State = CharacterStates.MeleeAttack;
                                 }
-
+                                if (kbState.IsKeyDown(Keys.X))
+                                {
+                                    playerCharacter.State = CharacterStates.RangedAttack;
+                                }
                                 break;
 
                             case CharacterStates.WalkLeft:
@@ -517,6 +536,10 @@ namespace Project_Forest
                                 if (kbState.IsKeyDown(Keys.Z))
                                 {
                                     playerCharacter.State = CharacterStates.MeleeAttack;
+                                }
+                                if (kbState.IsKeyDown(Keys.X))
+                                {
+                                    playerCharacter.State = CharacterStates.RangedAttack;
                                 }
                                 break;
 
@@ -559,7 +582,50 @@ namespace Project_Forest
                                     }
                                 }
                                 break;
+                            case CharacterStates.RangedAttack:
+                                playerCharacter.Fire.X = playerCharacter.X;
+                                playerCharacter.Fire.Move();
+                                if (playerCharacter.Direction == 0)
+                                {
+                                    playerCharacter.Fire.Direction = 0;
+                                }
+                                else
+                                {
+                                    playerCharacter.Fire.Direction = 1;
+                                }
+                                if (startedAttacking == false)
+                                {
+                                    foreach (Enemy enemy in currentFightScene.Enemies)
+                                    {
+                                        if (playerCharacter.Fire.IsColliding(enemy))
+                                        {
+                                            playerCharacter.Attack(enemy);
+                                        }
+                                    }
+                                    startingAttackTime = (int)gameTime.TotalGameTime.TotalSeconds;
+                                    startedAttacking = true;
+                                    playerCharacter.Fire.Active = true;
+                                }
+                                else if (startingAttackTime + 1 == (int)gameTime.TotalGameTime.TotalSeconds)
+                                {
+                                    playerCharacter.Fire.Active = false;
+                                    startedAttacking = false;
+                                    if (playerCharacter.Direction == 0)
+                                    {
+                                        playerCharacter.State = CharacterStates.FaceLeft;
+                                    }
+                                    if (playerCharacter.Direction == 1)
+                                    {
+                                        playerCharacter.State = CharacterStates.FaceRight;
+                                    }
+                                }
+                                break;
 
+                        }
+
+                        if (playerCharacter.X > GraphicsDevice.Viewport.Width / 2)
+                        {
+                            playerCharacter.X = GraphicsDevice.Viewport.Width / 2;
                         }
 
                         if (view.X >= firstLevel.CurrentFightSceneX)
@@ -594,6 +660,10 @@ namespace Project_Forest
                                 {
                                     playerCharacter.State = CharacterStates.MeleeAttack;
                                 }
+                                if (kbState.IsKeyDown(Keys.X))
+                                {
+                                    playerCharacter.State = CharacterStates.RangedAttack;
+                                }
                                 break;
                             case CharacterStates.FaceLeft:
                                 if (kbState.IsKeyDown(Keys.Right))
@@ -608,6 +678,10 @@ namespace Project_Forest
                                 {
                                     playerCharacter.State = CharacterStates.MeleeAttack;
                                 }
+                                if (kbState.IsKeyDown(Keys.X))
+                                {
+                                    playerCharacter.State = CharacterStates.RangedAttack;
+                                }
                                 break;
                             case CharacterStates.WalkRight:
                                 playerCharacter.Direction = 1;
@@ -620,6 +694,10 @@ namespace Project_Forest
                                 if (kbState.IsKeyDown(Keys.Z))
                                 {
                                     playerCharacter.State = CharacterStates.MeleeAttack;
+                                }
+                                if (kbState.IsKeyDown(Keys.X))
+                                {
+                                    playerCharacter.State = CharacterStates.RangedAttack;
                                 }
                                 break;
                             case CharacterStates.WalkLeft:
@@ -634,17 +712,21 @@ namespace Project_Forest
                                 {
                                     playerCharacter.State = CharacterStates.MeleeAttack;
                                 }
+                                if (kbState.IsKeyDown(Keys.X))
+                                {
+                                    playerCharacter.State = CharacterStates.RangedAttack;
+                                }
                                 break;
                             case CharacterStates.MeleeAttack:
                                 if (playerCharacter.Direction == 0)
                                 {
                                     chain.Direction = 0;
-                                    chain.Rotation -= .0349066f;
+                                    chain.Rotation += .0349066f;
                                 }
                                 else
                                 {
                                     chain.Direction = 1;
-                                    chain.Rotation += .0349066f;
+                                    chain.Rotation -= .0349066f;
                                 }
                                 if (startedAttacking == false)
                                 {
@@ -664,6 +746,44 @@ namespace Project_Forest
                                     chain.Active = false;
                                     startedAttacking = false;
                                     chain.Rotation = chain.DefaultRotation;
+                                    if (playerCharacter.Direction == 0)
+                                    {
+                                        playerCharacter.State = CharacterStates.FaceLeft;
+                                    }
+                                    if (playerCharacter.Direction == 1)
+                                    {
+                                        playerCharacter.State = CharacterStates.FaceRight;
+                                    }
+                                }
+                                break;
+                            case CharacterStates.RangedAttack:
+                                playerCharacter.Fire.Move();
+                                if (playerCharacter.Direction == 0)
+                                {
+                                    playerCharacter.Fire.Direction = 0;
+                                }
+                                else
+                                {
+                                    playerCharacter.Fire.Direction = 1;
+                                }
+                                if (startedAttacking == false)
+                                {
+                                    playerCharacter.Fire.X = playerCharacter.X;
+                                    foreach (Enemy enemy in currentFightScene.Enemies)
+                                    {
+                                        if (playerCharacter.Fire.IsColliding(enemy))
+                                        {
+                                            playerCharacter.Attack(enemy);
+                                        }
+                                    }
+                                    startingAttackTime = (int)gameTime.TotalGameTime.TotalSeconds;
+                                    startedAttacking = true;
+                                    playerCharacter.Fire.Active = true;
+                                }
+                                else if (startingAttackTime + 1 == (int)gameTime.TotalGameTime.TotalSeconds)
+                                {
+                                    playerCharacter.Fire.Active = false;
+                                    startedAttacking = false;
                                     if (playerCharacter.Direction == 0)
                                     {
                                         playerCharacter.State = CharacterStates.FaceLeft;
@@ -1002,6 +1122,7 @@ namespace Project_Forest
             entities.Clear();
             entities.Add(playerCharacter);
             entities.Add(chain);
+            entities.Add(fire);
             //entities.Add(firstEnemy);
 
             if (currentFightScene.Enemies.Count > 0)
@@ -1010,6 +1131,10 @@ namespace Project_Forest
                 {
                     entities.Add(enemy);
                 }
+            }
+            else
+            {
+                view.State = ViewStates.Moving;
             }
 
             base.Update(gameTime);
@@ -1025,7 +1150,7 @@ namespace Project_Forest
 
             spriteBatch.Begin();
 
-            view.DrawBackground(spriteBatch, groundTexture, 0, mainCharacterStartingY + mainCharacterStartingRect.Height);
+            view.DrawBackground(spriteBatch, groundTexture, backgroundTexture, 0, mainCharacterStartingY + mainCharacterStartingRect.Height, firstLevel, playerCharacter, GraphicsDevice);
  
             view.DrawEntities(spriteBatch, entities);
 

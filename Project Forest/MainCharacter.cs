@@ -13,17 +13,20 @@ namespace Project_Forest
         //int fuel; for later use
         //int ammo;
         ChainSaw chainsaw;
+        Flame fire;
 
         public  int HP {get{return hp;} set{hp = value;}}
         public ChainSaw Chainsaw {get{return chainsaw;} set{chainsaw = value;}}
+        public Flame Fire { get { return fire; } set { fire = value; } }
 
-        public MainCharacter(int xpos, int ypos, Rectangle rect, Texture2D texture, int direct, int speed, int health, ChainSaw melee):
+        public MainCharacter(int xpos, int ypos, Rectangle rect, Texture2D texture, int direct, int speed, int health, ChainSaw melee, Flame range):
             base(xpos,ypos,rect, texture,direct,speed)//Constructor base from movable
         {
             hp = health;
             //fuel = gas;  for later use
             //ammo = munition;
             chainsaw = melee;
+            fire = range;
         }
 
         public override void Move()

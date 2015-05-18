@@ -12,13 +12,6 @@ namespace Project_Forest
 {
     class Flame : Damaging
     {
-        bool visible;
-
-        bool Visible
-        {
-            get { return visible; }
-            set { visible = value; }
-        }
 
         public Flame(int xpos, int ypos, Rectangle rect, Texture2D text, int direct, int fast, int pwr)
             : base(xpos, ypos, rect, text, direct, fast, pwr)
@@ -30,10 +23,20 @@ namespace Project_Forest
 
         public override void Move()
         {
-            
+            if (this.Active)
+            {
+                if (Direction == 1)
+                {
+                    X+= 10;
+                }
+                else
+                {
+                    X-= 10;
+                }
+            }
         }
 
-        public void doDamage()
+        public override void doDamage(Enemy e)
         { 
             
         }

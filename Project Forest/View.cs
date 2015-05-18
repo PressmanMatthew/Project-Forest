@@ -12,6 +12,7 @@ namespace Project_Forest
         List<IEntity> entities; //List of entities to draw to the screen
         ViewStates state; //The current state of the view
         Rectangle currentLevelView;
+        int startingToMoveX;
 
         //Accessor and mutator for state
         public ViewStates State
@@ -79,7 +80,7 @@ namespace Project_Forest
                             }
                         }
                     }
-                    if (movable is Damaging)
+                    else if (movable is Damaging)
                     {
                         Damaging damaging = movable as Damaging;
 
@@ -90,13 +91,27 @@ namespace Project_Forest
                                 ChainSaw chain = damaging as ChainSaw;
 
                                 Rectangle sourceRect = new Rectangle(0, 0, chain.Texture.Width, chain.Texture.Height);
-                                if (damaging.Direction == 1)
+                                if (damaging.Direction == 0)
                                 {
                                     sb.Draw(chain.Texture, chain.CoRect, sourceRect, Color.White, chain.Rotation, new Vector2(0, 0), SpriteEffects.FlipHorizontally, 0f);
                                 }
                                 else
                                 {
                                     sb.Draw(chain.Texture, chain.CoRect, sourceRect, Color.White, chain.Rotation, new Vector2(0, 0), SpriteEffects.None, 0f);
+                                }
+                            }
+                            else if (damaging is Flame)
+                            {
+                                Flame fire = damaging as Flame;
+
+                                Rectangle sourceRect = new Rectangle(0, 0, fire.Texture.Width, fire.Texture.Height);
+                                if (damaging.Direction == 0)
+                                {
+                                    sb.Draw(fire.Texture, fire.CoRect, sourceRect, Color.White, 0, new Vector2(0, 0), SpriteEffects.FlipHorizontally, 0f);
+                                }
+                                else
+                                {
+                                    sb.Draw(fire.Texture, fire.CoRect, sourceRect, Color.White, 0, new Vector2(0, 0), SpriteEffects.None, 0f);
                                 }
                             }
                             else
@@ -131,9 +146,20 @@ namespace Project_Forest
         }
 
  
-        public void DrawBackground(SpriteBatch sb, Texture2D ground, int x, int y)
+        public void DrawBackground(SpriteBatch sb, Texture2D ground, Texture2D background, int xGround, int yGround, Level currentLevel, MainCharacter playerCharacter, GraphicsDevice gD)
         {
-            sb.Draw(ground, new Vector2(x, y), Color.White);
+            if (state == ViewStates.Moving)
+            {
+                if (playerCharacter.X == gD.Viewport.Width / 2)
+                {
+                    startingToMoveX += playerCharacter.Speed;
+                }
+            }
+            for (int i = 0; i < currentLevel.Rect.Width / background.Width; i++)
+            {
+                sb.Draw(background, new Vector2(background.Width * i - startingToMoveX, 0), Color.White);
+            }
+            sb.Draw(ground, new Vector2(xGround, yGround), Color.White);
         }
 
         public void DrawMenu(SpriteBatch sb, GameStates gState, Menu cMenu, Rectangle arrowRect, Texture2D arrowImage)

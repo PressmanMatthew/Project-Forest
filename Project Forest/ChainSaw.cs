@@ -42,7 +42,7 @@ namespace Project_Forest
         public ChainSaw(int xpos, int ypos, Rectangle rect, Texture2D text, int direct, int speed, int pwr)
             : base(xpos, ypos, rect, text, direct, speed, pwr)
         {
-            defaultRotation = 5.2359877f;
+            defaultRotation = 0;
             rotation = defaultRotation;
         }
 
