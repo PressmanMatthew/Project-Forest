@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Project_Forest
@@ -13,6 +14,7 @@ namespace Project_Forest
         ViewStates state; //The current state of the view
         Rectangle currentLevelView;
         int startingToMoveX;
+        KeyboardState kbState;
 
         //Accessor and mutator for state
         public ViewStates State
@@ -146,20 +148,22 @@ namespace Project_Forest
         }
 
  
-        public void DrawBackground(SpriteBatch sb, Texture2D ground, Texture2D background, int xGround, int yGround, Level currentLevel, MainCharacter playerCharacter, GraphicsDevice gD)
+        public void DrawBackground(SpriteBatch sb, Texture2D ground, Texture2D background, int xGround, int yGround, Level currentLevel, MainCharacter playerCharacter, GraphicsDevice gD, KeyboardState kbState)
         {
+            this.kbState = kbState;
+
             if (state == ViewStates.Moving)
             {
-                if (playerCharacter.X == gD.Viewport.Width / 2)
+                if (playerCharacter.X == gD.Viewport.Width / 2 && kbState.IsKeyDown(Keys.Right))
                 {
                     startingToMoveX += playerCharacter.Speed;
                 }
             }
-            for (int i = 0; i < currentLevel.Rect.Width / background.Width; i++)
+            for (int i = 0; i < 50; i++)
             {
-                sb.Draw(background, new Vector2(background.Width * i - startingToMoveX, 0), Color.White);
+                sb.Draw(background, new Vector2(background.Width * i - startingToMoveX, -100), Color.White);
             }
-            sb.Draw(ground, new Vector2(xGround, yGround), Color.White);
+
         }
 
         public void DrawMenu(SpriteBatch sb, GameStates gState, Menu cMenu, Rectangle arrowRect, Texture2D arrowImage)

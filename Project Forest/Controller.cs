@@ -639,6 +639,8 @@ namespace Project_Forest
                         if (playerCharacter.X > GraphicsDevice.Viewport.Width / 2)
                         {
                             playerCharacter.X = GraphicsDevice.Viewport.Width / 2;
+                            chain.X = GraphicsDevice.Viewport.Width / 2;
+                            fire.X = GraphicsDevice.Viewport.Width / 2;
                         }
 
                         if (view.X >= firstLevel.CurrentFightSceneX)
@@ -1186,7 +1188,6 @@ namespace Project_Forest
             entities.Add(playerCharacter);
             entities.Add(chain);
             entities.Add(fire);
-            //entities.Add(firstEnemy);
 
             if (currentFightScene.Enemies.Count > 0)
             {
@@ -1197,7 +1198,14 @@ namespace Project_Forest
             }
             else
             {
-                view.State = ViewStates.Moving;
+                if (firstLevel.EnemySceneQueue.Count > 0)
+                {
+                    view.State = ViewStates.Moving;
+                }
+                else
+                {
+                    gameOver = true;
+                }
             }
 
             base.Update(gameTime);
@@ -1213,7 +1221,7 @@ namespace Project_Forest
 
             spriteBatch.Begin();
 
-            view.DrawBackground(spriteBatch, groundTexture, backgroundTexture, 0, mainCharacterStartingY + mainCharacterStartingRect.Height, firstLevel, playerCharacter, GraphicsDevice);
+            view.DrawBackground(spriteBatch, groundTexture, backgroundTexture, 0, mainCharacterStartingY + mainCharacterStartingRect.Height, firstLevel, playerCharacter, GraphicsDevice, kbState);
  
             view.DrawEntities(spriteBatch, entities);
 

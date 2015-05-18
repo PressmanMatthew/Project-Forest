@@ -23,6 +23,11 @@ namespace Project_Forest
             get { return rect; }
         }
 
+        public Queue<FightScene> EnemySceneQueue
+        {
+            get { return enemySceneQueue; }
+        }
+
         public int CurrentFightSceneX
         {
             get
