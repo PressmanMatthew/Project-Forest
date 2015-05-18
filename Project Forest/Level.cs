@@ -76,7 +76,14 @@ namespace Project_Forest
 
         public FightScene Encounter()
         {
-            return enemySceneQueue.Dequeue();
+            if (enemySceneQueue.Count() != 0)
+            {
+                return enemySceneQueue.Dequeue();
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

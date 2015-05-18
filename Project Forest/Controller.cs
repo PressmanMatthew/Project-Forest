@@ -898,55 +898,56 @@ namespace Project_Forest
                         }
                         #endregion
                         #region Ground Enemy State Machine
-                        foreach (Enemy enemy in currentFightScene.Enemies)
+                        //foreach (Enemy enemy in currentFightScene.Enemies)
+                        for (int q = 0; q < currentFightScene.Enemies.Count; q++)
                         {
-                            switch (enemy.State)
+                            switch (currentFightScene.Enemies[q].State)
                             {
                                 case CharacterStates.FaceRight:
-                                    if (playerCharacter.X > enemy.X && !enemy.AtkRanRect.Intersects(playerCharacter.CoRect))
+                                    if (playerCharacter.X > currentFightScene.Enemies[q].X && !currentFightScene.Enemies[q].AtkRanRect.Intersects(playerCharacter.CoRect))
                                     {
-                                        enemy.State = CharacterStates.WalkRight;
+                                        currentFightScene.Enemies[q].State = CharacterStates.WalkRight;
                                     }
 
-                                    if (playerCharacter.X < enemy.X && !enemy.AtkRanRect.Intersects(playerCharacter.CoRect))
+                                    if (playerCharacter.X < currentFightScene.Enemies[q].X && !currentFightScene.Enemies[q].AtkRanRect.Intersects(playerCharacter.CoRect))
                                     {
-                                        enemy.State = CharacterStates.WalkLeft;
+                                        currentFightScene.Enemies[q].State = CharacterStates.WalkLeft;
                                     }
                                     break;
                                 case CharacterStates.FaceLeft:
-                                    if (playerCharacter.X > enemy.X && !enemy.AtkRanRect.Intersects(playerCharacter.CoRect))
+                                    if (playerCharacter.X > currentFightScene.Enemies[q].X && !currentFightScene.Enemies[q].AtkRanRect.Intersects(playerCharacter.CoRect))
                                     {
-                                        enemy.State = CharacterStates.WalkRight;
+                                        currentFightScene.Enemies[q].State = CharacterStates.WalkRight;
                                     }
-                                    if (playerCharacter.X < enemy.X && !enemy.AtkRanRect.Intersects(playerCharacter.CoRect))
+                                    if (playerCharacter.X < currentFightScene.Enemies[q].X && !currentFightScene.Enemies[q].AtkRanRect.Intersects(playerCharacter.CoRect))
                                     {
-                                        enemy.State = CharacterStates.WalkLeft;
+                                        currentFightScene.Enemies[q].State = CharacterStates.WalkLeft;
                                     }
                                     break;
                                 case CharacterStates.WalkRight:
-                                    enemy.Move(playerCharacter);
-                                    localEnemyAttackRanRect.X += enemy.Speed;
-                                    enemy.AtkRanRect = localEnemyAttackRanRect;
-                                    if (enemy.AtkRanRect.Intersects(playerCharacter.CoRect))
+                                    currentFightScene.Enemies[q].Move(playerCharacter);
+                                    localEnemyAttackRanRect.X += currentFightScene.Enemies[q].Speed;
+                                    currentFightScene.Enemies[q].AtkRanRect = localEnemyAttackRanRect;
+                                    if (currentFightScene.Enemies[q].AtkRanRect.Intersects(playerCharacter.CoRect))
                                     {
-                                        enemy.State = CharacterStates.MeleeAttack;
+                                        currentFightScene.Enemies[q].State = CharacterStates.MeleeAttack;
                                     }
                                     break;
                                 case CharacterStates.WalkLeft:
-                                    enemy.Move(playerCharacter);
-                                    localEnemyAttackRanRect.X -= enemy.Speed;
-                                    enemy.AtkRanRect = localEnemyAttackRanRect;
-                                    if (enemy.AtkRanRect.Intersects(playerCharacter.CoRect))
+                                    currentFightScene.Enemies[q].Move(playerCharacter);
+                                    localEnemyAttackRanRect.X -= currentFightScene.Enemies[q].Speed;
+                                    currentFightScene.Enemies[q].AtkRanRect = localEnemyAttackRanRect;
+                                    if (currentFightScene.Enemies[q].AtkRanRect.Intersects(playerCharacter.CoRect))
                                     {
-                                        enemy.State = CharacterStates.MeleeAttack;
+                                        currentFightScene.Enemies[q].State = CharacterStates.MeleeAttack;
                                     }
                                     break;
                                 case CharacterStates.MeleeAttack:
                                     if (enemyStartedAttacking == false)
                                     {
-                                        if (enemy.AtkRanRect.Intersects(playerCharacter.CoRect))
+                                        if (currentFightScene.Enemies[q].AtkRanRect.Intersects(playerCharacter.CoRect))
                                         {
-                                            enemy.Attack(playerCharacter);
+                                            currentFightScene.Enemies[q].Attack(playerCharacter);
                                         }
                                         enemyStartingAttackTime = (int)gameTime.TotalGameTime.TotalSeconds;
                                         enemyStartedAttacking = true;
@@ -954,13 +955,13 @@ namespace Project_Forest
                                     else if (enemyStartingAttackTime + 3 == (int)gameTime.TotalGameTime.TotalSeconds)
                                     {
                                         enemyStartedAttacking = false;
-                                        if (!enemy.AtkRanRect.Intersects(playerCharacter.CoRect) && playerCharacter.X < enemy.X)
+                                        if (!currentFightScene.Enemies[q].AtkRanRect.Intersects(playerCharacter.CoRect) && playerCharacter.X < currentFightScene.Enemies[q].X)
                                         {
-                                            enemy.State = CharacterStates.WalkLeft;
+                                            currentFightScene.Enemies[q].State = CharacterStates.WalkLeft;
                                         }
-                                        if (!enemy.AtkRanRect.Intersects(playerCharacter.CoRect) && playerCharacter.X > enemy.X)
+                                        if (!currentFightScene.Enemies[q].AtkRanRect.Intersects(playerCharacter.CoRect) && playerCharacter.X > currentFightScene.Enemies[q].X)
                                         {
-                                            enemy.State = CharacterStates.WalkRight;
+                                            currentFightScene.Enemies[q].State = CharacterStates.WalkRight;
                                         }
                                     }
                                     break;
@@ -968,63 +969,63 @@ namespace Project_Forest
                         }
                         #endregion
                         #region Old Code
-                        //switch (firstEnemy.State)
+                        //switch (firstcurrentFightScene.Enemies[q].State)
                         //{
                         //    case CharacterStates.FaceRight:
-                        //        if (playerCharacter.X > firstEnemy.X && !firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect))
+                        //        if (playerCharacter.X > firstcurrentFightScene.Enemies[q].X && !firstcurrentFightScene.Enemies[q].AtkRanRect.Intersects(playerCharacter.CoRect))
                         //        {
-                        //            firstEnemy.State = CharacterStates.WalkRight;
+                        //            firstcurrentFightScene.Enemies[q].State = CharacterStates.WalkRight;
                         //        }
-                        //        if (playerCharacter.X < firstEnemy.X && !firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect))
+                        //        if (playerCharacter.X < firstcurrentFightScene.Enemies[q].X && !firstcurrentFightScene.Enemies[q].AtkRanRect.Intersects(playerCharacter.CoRect))
                         //        {
-                        //            firstEnemy.State = CharacterStates.WalkLeft;
+                        //            firstcurrentFightScene.Enemies[q].State = CharacterStates.WalkLeft;
                         //        }
                         //        break;
                         //    case CharacterStates.FaceLeft:
-                        //        if (playerCharacter.X > firstEnemy.X && !firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect))
+                        //        if (playerCharacter.X > firstcurrentFightScene.Enemies[q].X && !firstcurrentFightScene.Enemies[q].AtkRanRect.Intersects(playerCharacter.CoRect))
                         //        {
-                        //            firstEnemy.State = CharacterStates.WalkRight;
+                        //            firstcurrentFightScene.Enemies[q].State = CharacterStates.WalkRight;
                         //        }
-                        //        if (playerCharacter.X < firstEnemy.X && !firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect))
+                        //        if (playerCharacter.X < firstcurrentFightScene.Enemies[q].X && !firstcurrentFightScene.Enemies[q].AtkRanRect.Intersects(playerCharacter.CoRect))
                         //        {
-                        //            firstEnemy.State = CharacterStates.WalkLeft;
+                        //            firstcurrentFightScene.Enemies[q].State = CharacterStates.WalkLeft;
                         //        }
                         //        break;
                         //    case CharacterStates.WalkRight:
-                        //        firstEnemy.Move(playerCharacter);
-                        //        localEnemyAttackRanRect.X += firstEnemy.Speed;
-                        //        firstEnemy.AtkRanRect = localEnemyAttackRanRect;
-                        //        if (firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect))
+                        //        firstcurrentFightScene.Enemies[q].Move(playerCharacter);
+                        //        localEnemyAttackRanRect.X += firstcurrentFightScene.Enemies[q].Speed;
+                        //        firstcurrentFightScene.Enemies[q].AtkRanRect = localEnemyAttackRanRect;
+                        //        if (firstcurrentFightScene.Enemies[q].AtkRanRect.Intersects(playerCharacter.CoRect))
                         //        {
-                        //            firstEnemy.State = CharacterStates.MeleeAttack;
+                        //            firstcurrentFightScene.Enemies[q].State = CharacterStates.MeleeAttack;
                         //        }
                         //        break;
                         //    case CharacterStates.WalkLeft:
-                        //        firstEnemy.Move(playerCharacter);
-                        //        localEnemyAttackRanRect.X -= firstEnemy.Speed;
-                        //        firstEnemy.AtkRanRect = localEnemyAttackRanRect;
-                        //        if (firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect))
+                        //        firstcurrentFightScene.Enemies[q].Move(playerCharacter);
+                        //        localEnemyAttackRanRect.X -= firstcurrentFightScene.Enemies[q].Speed;
+                        //        firstcurrentFightScene.Enemies[q].AtkRanRect = localEnemyAttackRanRect;
+                        //        if (firstcurrentFightScene.Enemies[q].AtkRanRect.Intersects(playerCharacter.CoRect))
                         //        {
-                        //            firstEnemy.State = CharacterStates.MeleeAttack;
+                        //            firstcurrentFightScene.Enemies[q].State = CharacterStates.MeleeAttack;
                         //        }
                         //        break;
                         //    case CharacterStates.MeleeAttack:
                         //        if (startedAttacking == false)
                         //        {
-                        //            firstEnemy.Attack(playerCharacter);
+                        //            firstcurrentFightScene.Enemies[q].Attack(playerCharacter);
                         //            startingAttackTime = (int)gameTime.TotalGameTime.TotalSeconds;
                         //            startedAttacking = true;
                         //        }
                         //        else if (startingAttackTime + 3 == (int)gameTime.TotalGameTime.TotalSeconds)
                         //        {
                         //            startedAttacking = false;
-                        //            if (!firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect) && playerCharacter.X < firstEnemy.X)
+                        //            if (!firstcurrentFightScene.Enemies[q].AtkRanRect.Intersects(playerCharacter.CoRect) && playerCharacter.X < firstcurrentFightScene.Enemies[q].X)
                         //            {
-                        //                firstEnemy.State = CharacterStates.WalkLeft;
+                        //                firstcurrentFightScene.Enemies[q].State = CharacterStates.WalkLeft;
                         //            }
-                        //            if (!firstEnemy.AtkRanRect.Intersects(playerCharacter.CoRect) && playerCharacter.X > firstEnemy.X)
+                        //            if (!firstcurrentFightScene.Enemies[q].AtkRanRect.Intersects(playerCharacter.CoRect) && playerCharacter.X > firstcurrentFightScene.Enemies[q].X)
                         //            {
-                        //                firstEnemy.State = CharacterStates.WalkRight;
+                        //                firstcurrentFightScene.Enemies[q].State = CharacterStates.WalkRight;
                         //            }
                         //        }
                         //        break;
@@ -1230,8 +1231,8 @@ namespace Project_Forest
                             firstEnemy.AtkRanRect = new Rectangle(firstEnemy.X - 10, firstEnemy.Y-10, firstEnemy.CoRect.Width + 20, firstEnemy.CoRect.Height + 20);
 
                             //level new level parameter(ent)
-                            firstLevel = new Level(firstEnemy);
                             currentFightScene = firstLevel.Encounter();
+                            firstLevel = new Level(firstEnemy);
                             gameOver = false;
                             view.State = ViewStates.Stationary;
                         }
@@ -1266,9 +1267,10 @@ namespace Project_Forest
             }
 
             int i = 0;
-            foreach (Enemy enemy in currentFightScene.Enemies)
+            //foreach (Enemy enemy in currentFightScene.Enemies)
+            for (int q = 0; q < currentFightScene.Enemies.Count; q++)
             {
-                Console.WriteLine(i + ": X - " + enemy.X + "; Y - " + enemy.Y);
+                Console.WriteLine(i + ": X - " + currentFightScene.Enemies[q].X + "; Y - " + currentFightScene.Enemies[q].Y);
                 i++;
             }
 
@@ -1279,9 +1281,11 @@ namespace Project_Forest
 
             if (currentFightScene.Enemies.Count > 0)
             {
-                foreach (Enemy enemy in currentFightScene.Enemies)
+                //foreach (Enemy enemy in currentFightScene.Enemies)
+                for (int q = 0; q < currentFightScene.Enemies.Count; q++ )
                 {
-                    entities.Add(enemy);
+                    //currentFightScene.Enemies[q].Move(playerCharacter);
+                    entities.Add(currentFightScene.Enemies[q]);
                 }
             }
             else
@@ -1296,13 +1300,10 @@ namespace Project_Forest
                 }
             }
 
+
             base.Update(gameTime);
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.DarkGreen);
