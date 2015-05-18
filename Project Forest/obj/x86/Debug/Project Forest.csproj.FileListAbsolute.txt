@@ -244,3 +244,43 @@ C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\Content\F
 C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\Content\GameOverMenu.png
 C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\Content\Linkin Park - In The End.mp3
 C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\MonoGame.Framework.xml
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\obj\x86\Debug\Project Forest.exe
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\obj\x86\Debug\Project Forest.pdb
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Content\ArrowRight.png
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Content\Background.png
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Content\ChainSaw200.png
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Content\ControlsMenu.png
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Content\CreditsMenu.png
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Content\Ent 200.png
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Content\Fire 150x87.png
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Content\GameOverMenu.png
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Content\Ground.png
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Content\Main Character200.png
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Content\MainMenu.png
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Content\PauseMenu.png
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Content\Arial14.xnb
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Content\Linkin Park - In The End.mp3
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Content\OpeningSummary.png
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Project Forest.exe
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Project Forest.pdb
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\MonoGame.Framework.dll
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.MediaFoundation.dll
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.dll
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.XAudio2.dll
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct3D11.dll
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.DXGI.dll
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct2D1.dll
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Lidgren.Network.dll
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.XInput.dll
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.RawInput.dll
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct3D9.dll
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.MediaFoundation.xml
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.xml
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.XAudio2.xml
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct3D11.xml
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.DXGI.xml
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct2D1.xml
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.XInput.xml
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.RawInput.xml
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct3D9.xml
+C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\obj\x86\Debug\Project Forest.csprojResolveAssemblyReference.cache
