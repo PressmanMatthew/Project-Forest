@@ -284,3 +284,5 @@ C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\S
 C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.RawInput.xml
 C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct3D9.xml
 C:\Users\lyne\Documents\GitHub\Project-Forest\Project Forest\obj\x86\Debug\Project Forest.csprojResolveAssemblyReference.cache
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\Content\OpeningSummary.png
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\Content\TerrariaMusic.xgs
