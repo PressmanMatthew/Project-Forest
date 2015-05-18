@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
+using Microsoft.Xna.Framework.Audio;
 //using Microsoft.Xna.Framework.GamerServices;
 #endregion
 
@@ -51,6 +52,9 @@ namespace Project_Forest
 
         MainCharacter playerCharacter;
         Ent firstEnemy;
+
+        SoundEffect music;
+        SoundController musicController;
 
         ChainSaw chain;
         Flame fire;
@@ -211,6 +215,9 @@ namespace Project_Forest
 
             arial = this.Content.Load<SpriteFont>("Arial14");
 
+            music = Content.Load<SoundEffect>("Linkin Park - In The End");
+            musicController = new SoundController(music);
+
             chain = new ChainSaw(mainCharacterStartingX + mainCharacterStartingRect.Width - 20, mainCharacterStartingY, chainRect, chainTexture, 0, 2, 50);
             chain.Active = false;
 
@@ -248,6 +255,10 @@ namespace Project_Forest
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            if(musicController.Music.State == SoundState.Stopped)
+            {
+                musicController.Play();
+            }
             playerCharacter.Speed = gameTime.ElapsedGameTime.Milliseconds / 3;
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
