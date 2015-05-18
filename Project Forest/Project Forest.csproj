@@ -53,6 +53,7 @@
     <StartupObject>Project_Forest.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BossZuul.cs" />
     <Compile Include="ButtonController.cs" />
     <Compile Include="ChainSaw.cs" />
     <Compile Include="ControlsMenu.cs" />
