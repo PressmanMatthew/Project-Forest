@@ -29,11 +29,11 @@ namespace Project_Forest
             }
         }
 
-        public override void Fire(MainCharacter player)
+        public override void Attack(MainCharacter player)
         {
             if (player.CoRect.Intersects(AtkRanRect))//Deteremine best way
             {
-                Bullet = new EnemyBullet(X, Y, Bullet.CoRect, Bullet.Texture, 1, 8, 2);//Note decide what number direction is down
+                Bullet = new EnemyBullet(X, Y, Bullet.CoRect, Bullet.Texture, 2, 8, 2);//Note decide what number direction is down
             }
         }
     }

@@ -986,6 +986,80 @@ namespace Project_Forest
                             }
                         }
                         #endregion
+                        #region Ranged Enemies State Machine
+
+                        for (int q = 0; q < currentFightScene.Enemies.Count; q++)
+                        {
+                            if (currentFightScene.Enemies[q] is RangedEnemy || currentFightScene.Enemies[q] is FlyingEnemy)
+                            {
+                                switch (currentFightScene.Enemies[q].State)
+                                {
+                                    case CharacterStates.FaceRight:
+                                        if (playerCharacter.X > currentFightScene.Enemies[q].X && !currentFightScene.Enemies[q].AtkRanRect.Intersects(playerCharacter.CoRect))
+                                        {
+                                            currentFightScene.Enemies[q].State = CharacterStates.WalkRight;
+                                        }
+
+                                        if (playerCharacter.X < currentFightScene.Enemies[q].X && !currentFightScene.Enemies[q].AtkRanRect.Intersects(playerCharacter.CoRect))
+                                        {
+                                            currentFightScene.Enemies[q].State = CharacterStates.WalkLeft;
+                                        }
+                                        break;
+                                    case CharacterStates.FaceLeft:
+                                        if (playerCharacter.X > currentFightScene.Enemies[q].X && !currentFightScene.Enemies[q].AtkRanRect.Intersects(playerCharacter.CoRect))
+                                        {
+                                            currentFightScene.Enemies[q].State = CharacterStates.WalkRight;
+                                        }
+                                        if (playerCharacter.X < currentFightScene.Enemies[q].X && !currentFightScene.Enemies[q].AtkRanRect.Intersects(playerCharacter.CoRect))
+                                        {
+                                            currentFightScene.Enemies[q].State = CharacterStates.WalkLeft;
+                                        }
+                                        break;
+                                    case CharacterStates.WalkRight:
+                                        currentFightScene.Enemies[q].Move(playerCharacter);
+                                        localEnemyAttackRanRect.X += currentFightScene.Enemies[q].Speed;
+                                        currentFightScene.Enemies[q].AtkRanRect = localEnemyAttackRanRect;
+                                        if (currentFightScene.Enemies[q].AtkRanRect.Intersects(playerCharacter.CoRect))
+                                        {
+                                            currentFightScene.Enemies[q].State = CharacterStates.RangedAttack;
+                                        }
+                                        break;
+                                    case CharacterStates.WalkLeft:
+                                        currentFightScene.Enemies[q].Move(playerCharacter);
+                                        localEnemyAttackRanRect.X -= currentFightScene.Enemies[q].Speed;
+                                        currentFightScene.Enemies[q].AtkRanRect = localEnemyAttackRanRect;
+                                        if (currentFightScene.Enemies[q].AtkRanRect.Intersects(playerCharacter.CoRect))
+                                        {
+                                            currentFightScene.Enemies[q].State = CharacterStates.RangedAttack;
+                                        }
+                                        break;
+                                    case CharacterStates.RangedAttack:
+                                        if (enemyStartedAttacking == false)
+                                        {
+                                            if (currentFightScene.Enemies[q].AtkRanRect.Intersects(playerCharacter.CoRect))
+                                            {
+                                                currentFightScene.Enemies[q].Attack(playerCharacter);
+                                            }
+                                            enemyStartingAttackTime = (int)gameTime.TotalGameTime.TotalSeconds;
+                                            enemyStartedAttacking = true;
+                                        }
+                                        else if (enemyStartingAttackTime + 1 == (int)gameTime.TotalGameTime.TotalSeconds)
+                                        {
+                                            enemyStartedAttacking = false;
+                                            if (!currentFightScene.Enemies[q].AtkRanRect.Intersects(playerCharacter.CoRect) && playerCharacter.X < currentFightScene.Enemies[q].X)
+                                            {
+                                                currentFightScene.Enemies[q].State = CharacterStates.WalkRight;
+                                            }
+                                            if (!currentFightScene.Enemies[q].AtkRanRect.Intersects(playerCharacter.CoRect) && playerCharacter.X > currentFightScene.Enemies[q].X)
+                                            {
+                                                currentFightScene.Enemies[q].State = CharacterStates.WalkLeft;
+                                            }
+                                        }
+                                        break;
+                                }
+                            }
+                        }
+                        #endregion
                         #region Old Code
                         //switch (firstcurrentFightScene.Enemies[q].State)
                         //{
