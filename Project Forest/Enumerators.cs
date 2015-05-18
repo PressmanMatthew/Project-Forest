@@ -36,6 +36,7 @@ namespace Project_Forest
         Credits,
         PauseMenu,
         GameOverMenu,
+        Summary,
     }
 
     enum ArrowSelection

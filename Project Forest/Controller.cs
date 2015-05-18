@@ -25,12 +25,14 @@ namespace Project_Forest
         MainMenu mainMenu;
         PauseMenu pauseMenu;
         GameOverMenu gameOverMenu;
+        SummaryMenu summaryMenu;
 
         List<MenuOption> mainMenuOptions;
         List<MenuOption> controlsOptions;
         List<MenuOption> creditsOptions;
         List<MenuOption> pauseOptions;
         List<MenuOption> gameOverOptions;
+        List<MenuOption> thereAreNoOptions;
         Menu currentMenu;
         ButtonController buttons;
         Rectangle menuSelectionArrowRect;
@@ -46,6 +48,7 @@ namespace Project_Forest
         private Texture2D creditsMenuImage;
         private Texture2D pauseMenuImage;
         private Texture2D gameOverMenuImage;
+        private Texture2D summaryImage;
 
         Level firstLevel;
         FightScene currentFightScene;
@@ -175,6 +178,7 @@ namespace Project_Forest
             creditsMenu = new CreditsMenu(creditsMenuImage, creditsOptions);
             pauseMenu = new PauseMenu(pauseMenuImage, pauseOptions);
             gameOverMenu = new GameOverMenu(gameOverMenuImage, gameOverOptions);
+            summaryMenu = new SummaryMenu(summaryImage, thereAreNoOptions = new List<MenuOption>());
 
             currentMenu = mainMenu;
             mainMenu.CurrentMenuSelection = ArrowSelection.Play;
@@ -212,6 +216,8 @@ namespace Project_Forest
             pauseMenuImage = this.Content.Load<Texture2D>("PauseMenu");
             gameOverMenuImage = this.Content.Load<Texture2D>("GameOverMenu");
             menuSelectionArrowTexture = this.Content.Load<Texture2D>("ArrowRight");
+            summaryImage = this.Content.Load<Texture2D>("OpeningSummary");
+            
 
             arial = this.Content.Load<SpriteFont>("Arial14");
 
@@ -235,6 +241,7 @@ namespace Project_Forest
             creditsMenu.getsetImage = creditsMenuImage;
             pauseMenu.getsetImage = pauseMenuImage;
             gameOverMenu.getsetImage = gameOverMenuImage;
+            summaryMenu.getsetImage = summaryImage;
 
             entities.Add(playerCharacter);
         }
@@ -289,7 +296,8 @@ namespace Project_Forest
                                 }
                                 if (SingleKeyPress(Keys.Enter))//go to GameState.Game
                                 {
-                                    gameState = GameStates.Game;
+                                    //gameState = GameStates.Game;
+                                    menuState = MenuStates.Summary;
                                 }
                             }
                             //Controls
@@ -452,6 +460,13 @@ namespace Project_Forest
                             }
                             break;
                         #endregion
+                        case MenuStates.Summary:
+                            currentMenu = summaryMenu;
+                            if (SingleKeyPress(Keys.Enter))//go to GameState.Game
+                            {
+                                gameState = GameStates.Game;
+                            }
+                            break;
                     }
                     break;
                 #endregion
