@@ -23,10 +23,13 @@ namespace Project_Forest
         ControlsMenu controlsMenu;
         MainMenu mainMenu;
         PauseMenu pauseMenu;
+        GameOverMenu gameOverMenu;
+
         List<MenuOption> mainMenuOptions;
         List<MenuOption> controlsOptions;
         List<MenuOption> creditsOptions;
         List<MenuOption> pauseOptions;
+        List<MenuOption> gameOverOptions;
         Menu currentMenu;
         ButtonController buttons;
         Rectangle menuSelectionArrowRect;
@@ -41,6 +44,7 @@ namespace Project_Forest
         private Texture2D controlsMenuImage;
         private Texture2D creditsMenuImage;
         private Texture2D pauseMenuImage;
+        private Texture2D gameOverMenuImage;
 
         Level firstLevel;
         FightScene currentFightScene;
@@ -157,17 +161,24 @@ namespace Project_Forest
             pauseOptions.Add(new MenuOption("Controls", (GraphicsDevice.Viewport.Width / 2) - 50, (GraphicsDevice.Viewport.Height / 2) + 50));
             pauseOptions.Add(new MenuOption("Main Menu", (GraphicsDevice.Viewport.Width / 2) - 50, (GraphicsDevice.Viewport.Height / 2) + 100));
 
+            gameOverOptions = new List<MenuOption>();
+
+            gameOverOptions.Add(new MenuOption("Main Menu", (GraphicsDevice.Viewport.Width / 2) - 50, (GraphicsDevice.Viewport.Height / 2)));
+            gameOverOptions.Add(new MenuOption("Quit", (GraphicsDevice.Viewport.Width / 2) - 50, (GraphicsDevice.Viewport.Height / 2) + 50));
+
             mainMenu = new MainMenu(mainMenuImage, mainMenuOptions);
             controlsMenu = new ControlsMenu(controlsMenuImage, controlsOptions);
             creditsMenu = new CreditsMenu(creditsMenuImage, creditsOptions);
             pauseMenu = new PauseMenu(pauseMenuImage, pauseOptions);
-
+            gameOverMenu = new GameOverMenu(gameOverMenuImage, gameOverOptions);
 
             currentMenu = mainMenu;
             mainMenu.CurrentMenuSelection = ArrowSelection.Play;
             controlsMenu.CurrentMenuSelection = ArrowSelection.MoveLeft;
             creditsMenu.CurrentMenuSelection = ArrowSelection.Back;
             pauseMenu.CurrentMenuSelection = ArrowSelection.Resume;
+            gameOverMenu.CurrentMenuSelection = ArrowSelection.MainMenu;
+
 
             buttons = new ButtonController();
             base.Initialize();
@@ -195,6 +206,7 @@ namespace Project_Forest
             controlsMenuImage = this.Content.Load<Texture2D>("ControlsMenu");
             creditsMenuImage = this.Content.Load<Texture2D>("CreditsMenu");
             pauseMenuImage = this.Content.Load<Texture2D>("PauseMenu");
+            gameOverMenuImage = this.Content.Load<Texture2D>("GameOverMenu");
             menuSelectionArrowTexture = this.Content.Load<Texture2D>("ArrowRight");
 
             arial = this.Content.Load<SpriteFont>("Arial14");
@@ -215,6 +227,7 @@ namespace Project_Forest
             controlsMenu.getsetImage = controlsMenuImage;
             creditsMenu.getsetImage = creditsMenuImage;
             pauseMenu.getsetImage = pauseMenuImage;
+            gameOverMenu.getsetImage = gameOverMenuImage;
 
             entities.Add(playerCharacter);
         }
@@ -937,6 +950,12 @@ namespace Project_Forest
                         gameState = GameStates.Pause;
                         menuState = MenuStates.PauseMenu;
                     }
+                    if (SingleKeyPress(Keys.G))
+                    {
+                        gameState = GameStates.GameOver;
+                        menuState = MenuStates.GameOverMenu;
+                        //currentMenu = gameOverMenu;
+                    }
                     break;
                 #endregion
                 #region GameStates.Pause
@@ -1099,6 +1118,49 @@ namespace Project_Forest
                     }
                     break;
                 #endregion
+                #region GameStates.GameOver
+                case GameStates.GameOver://GameState.GameOver uses two Menu states: PauseMenu and Controls    
+
+                    menuState = MenuStates.GameOverMenu;
+                    currentMenu = gameOverMenu;
+                    Console.WriteLine(currentMenu.getsetImage);
+                    //MainMenu
+                    if (currentMenu.CurrentMenuSelection == ArrowSelection.MainMenu)
+                    {
+                        menuSelectionArrowRect.Y = gameOverOptions[0].Position.Y;
+                        if (SingleKeyPress(Keys.Down))
+                        {
+                            currentMenu.CurrentMenuSelection = ArrowSelection.Quit;
+                        }
+                        if (SingleKeyPress(Keys.Enter))//Changes gameStates from GameOver to Menu and menuState from GameOverMenu to MainMenu 
+                        {
+                            gameState = GameStates.Menu;
+                            menuState = MenuStates.MainMenu;
+
+                            playerCharacter = new MainCharacter(mainCharacterStartingX, mainCharacterStartingY, mainCharacterStartingRect, mainTexture, 1, 10, 100, chain, fire);
+                            firstEnemy = new Ent((GraphicsDevice.Viewport.Width / 3) * 2 + 50, firstEnemyStartingY, firstEnemyStartingRect, entTexture, 1, 5, 100, firstEnemyAttackRangeRect);
+                            firstEnemy.AtkRanRect = new Rectangle(firstEnemy.X - 10, firstEnemy.Y-10, firstEnemy.CoRect.Width + 20, firstEnemy.CoRect.Height + 20);
+
+                            //level new level parameter(ent)
+                            firstLevel = new Level(firstEnemy);
+                            currentFightScene = firstLevel.Encounter();
+                        }
+                    }
+                    //Quit
+                    else if (currentMenu.CurrentMenuSelection == ArrowSelection.Quit)
+                    {
+                        menuSelectionArrowRect.Y = gameOverOptions[1].Position.Y;
+                        if (SingleKeyPress(Keys.Up))
+                        {
+                            currentMenu.CurrentMenuSelection = ArrowSelection.MainMenu;
+                        }
+                        if (SingleKeyPress(Keys.Enter))//Exits
+                        {
+                            this.Exit();
+                        }
+                    }
+                    break;
+                #endregion
             }
 
             currentFightScene.UpdateList();
@@ -1109,7 +1171,8 @@ namespace Project_Forest
             }
             if (gameOver)
             {
-                this.Exit();
+                gameState = GameStates.GameOver;
+                menuState = MenuStates.GameOverMenu;
             }
 
             int i = 0;

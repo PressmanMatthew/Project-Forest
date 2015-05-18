@@ -239,3 +239,4 @@ C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.D
 E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\Content\Background.png
 E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\Content\ChainSaw200.png
 E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\Content\Fire 150x87.png
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\Content\GameOverMenu.png
