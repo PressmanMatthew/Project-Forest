@@ -242,5 +242,5 @@ C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\Content\B
 C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\Content\ChainSaw200.png
 C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\Content\Fire 150x87.png
 C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\Content\GameOverMenu.png
-C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\Lidgren.Network.dll
 C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\Content\Linkin Park - In The End.mp3
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\MonoGame.Framework.xml

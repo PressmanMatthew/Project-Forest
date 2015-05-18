@@ -215,8 +215,8 @@ namespace Project_Forest
 
             arial = this.Content.Load<SpriteFont>("Arial14");
 
-            music = Content.Load<SoundEffect>("Linkin Park - In The End");
-            musicController = new SoundController(music);
+            //music = Content.Load<SoundEffect>("Linkin Park - In The End");
+            //musicController = new SoundController(music);
 
             chain = new ChainSaw(mainCharacterStartingX + mainCharacterStartingRect.Width - 20, mainCharacterStartingY, chainRect, chainTexture, 0, 2, 50);
             chain.Active = false;
@@ -255,10 +255,10 @@ namespace Project_Forest
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if(musicController.Music.State == SoundState.Stopped)
+            /*if(musicController.Music.State == SoundState.Stopped)
             {
                 musicController.Play();
-            }
+            }*/
             playerCharacter.Speed = gameTime.ElapsedGameTime.Milliseconds / 3;
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -551,6 +551,12 @@ namespace Project_Forest
                                 view.X += playerCharacter.Speed;
                                 chain.X -= playerCharacter.Speed;
 
+                                if (playerCharacter.X < 0)
+                                {
+                                    playerCharacter.X += playerCharacter.Speed;
+                                    chain.X = playerCharacter.X;
+                                }
+
                                 if (kbState.IsKeyUp(Keys.Left))
                                 {
 
@@ -605,7 +611,34 @@ namespace Project_Forest
                                         playerCharacter.State = CharacterStates.FaceRight;
                                     }
                                 }
-                                break;
+                                if (kbState.IsKeyDown(Keys.Right))
+                                {
+                                    playerCharacter.Direction = 1;
+
+                                    playerCharacter.X += playerCharacter.Speed;
+
+                                    view.X += playerCharacter.Speed;
+                                    chain.X += playerCharacter.Speed;
+
+                                }
+                                if (kbState.IsKeyDown(Keys.Left))
+                                {
+                                    playerCharacter.Direction = 0;
+
+                                    playerCharacter.X -= playerCharacter.Speed;
+
+                                    view.X += playerCharacter.Speed;
+                                    chain.X -= playerCharacter.Speed;
+
+                                    if (playerCharacter.X < 0)
+                                    {
+                                        playerCharacter.X += playerCharacter.Speed;
+                                        chain.X = playerCharacter.X;
+                                    }
+
+
+                                }
+                                    break;
                             case CharacterStates.RangedAttack:
                                 playerCharacter.Fire.X = playerCharacter.X;
                                 playerCharacter.Fire.Move();
@@ -713,6 +746,11 @@ namespace Project_Forest
                                 playerCharacter.Direction = 1;
                                 playerCharacter.X += playerCharacter.Speed;
                                 chain.X += playerCharacter.Speed;
+                                if (playerCharacter.X > (GraphicsDevice.Viewport.Width - playerCharacter.CoRect.Width))
+                                {
+                                    playerCharacter.X -= playerCharacter.Speed;
+                                    chain.X = playerCharacter.X;
+                                }
                                 if (kbState.IsKeyUp(Keys.Right))
                                 {
                                     playerCharacter.State = CharacterStates.FaceRight;
@@ -730,6 +768,11 @@ namespace Project_Forest
                                 playerCharacter.Direction = 0;
                                 playerCharacter.X -= playerCharacter.Speed;
                                 chain.X -= playerCharacter.Speed;
+                                if (playerCharacter.X < 0)
+                                {
+                                    playerCharacter.X += playerCharacter.Speed;
+                                    chain.X = playerCharacter.X;
+                                }
                                 if (kbState.IsKeyUp(Keys.Left))
                                 {
                                     playerCharacter.State = CharacterStates.FaceLeft;
@@ -780,6 +823,38 @@ namespace Project_Forest
                                     {
                                         playerCharacter.State = CharacterStates.FaceRight;
                                     }
+                                }
+                                if (kbState.IsKeyDown(Keys.Right))
+                                {
+                                    playerCharacter.Direction = 1;
+
+                                    playerCharacter.X += playerCharacter.Speed;
+
+                                    view.X += playerCharacter.Speed;
+                                    chain.X += playerCharacter.Speed;
+
+                                    if (playerCharacter.X > (GraphicsDevice.Viewport.Width - playerCharacter.CoRect.Width))
+                                    {
+                                        playerCharacter.X -= playerCharacter.Speed;
+                                        chain.X = playerCharacter.X;
+                                    }
+                                }
+                                if (kbState.IsKeyDown(Keys.Left))
+                                {
+                                    playerCharacter.Direction = 0;
+
+                                    playerCharacter.X -= playerCharacter.Speed;
+
+                                    view.X += playerCharacter.Speed;
+                                    chain.X -= playerCharacter.Speed;
+
+                                    if (playerCharacter.X < 0)
+                                    {
+                                        playerCharacter.X += playerCharacter.Speed;
+                                        chain.X = playerCharacter.X;
+                                    }
+
+
                                 }
                                 break;
                             case CharacterStates.RangedAttack:
@@ -1157,6 +1232,8 @@ namespace Project_Forest
                             //level new level parameter(ent)
                             firstLevel = new Level(firstEnemy);
                             currentFightScene = firstLevel.Encounter();
+                            gameOver = false;
+                            view.State = ViewStates.Stationary;
                         }
                     }
                     //Quit
