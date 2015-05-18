@@ -64,6 +64,7 @@
     <Compile Include="Controller.cs" />
     <Compile Include="Enumerators.cs" />
     <Compile Include="FightScene.cs" />
+    <Compile Include="Flame.cs" />
     <Compile Include="FlyingEnemy.cs" />
     <Compile Include="GameVariables.cs" />
     <Compile Include="GroundEnemy.cs" />

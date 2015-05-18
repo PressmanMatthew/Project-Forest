@@ -29,13 +29,13 @@ namespace Project_Forest
         {
             if (enemies.Count > 0)
             {
-                foreach (Enemy e in enemies)
+                for (int i = 0; i < enemies.Count; i++ )
                 {
-                    if (e.HP <= 0)
+                    if (enemies[i].HP <= 0)
                     {
-                        e.X = -100;
-                        e.Y = -100;
-                        enemies.Remove(e);
+                        enemies[i].X = -100;
+                        enemies[i].Y = -100;
+                        enemies.Remove(enemies[i]);
                     }
                 }
             }

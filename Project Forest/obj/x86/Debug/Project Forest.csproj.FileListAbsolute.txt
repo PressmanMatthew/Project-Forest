@@ -202,3 +202,38 @@ C:\Users\Cyber Commander\Documents\GitHub\Project-Forest\Project Forest\bin\Wind
 C:\Users\Cyber Commander\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.RawInput.xml
 C:\Users\Cyber Commander\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct3D9.xml
 C:\Users\Cyber Commander\Documents\GitHub\Project-Forest\Project Forest\obj\x86\Debug\Project Forest.csprojResolveAssemblyReference.cache
+C:\Users\James\Desktop\Project-Forest\Project Forest\obj\x86\Debug\Project Forest.exe
+C:\Users\James\Desktop\Project-Forest\Project Forest\obj\x86\Debug\Project Forest.pdb
+C:\Users\James\Desktop\Project-Forest\Project Forest\obj\x86\Debug\Project Forest.csprojResolveAssemblyReference.cache
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\Content\ArrowRight.png
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\Content\ChainSaw.png
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\Content\ControlsMenu.png
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\Content\CreditsMenu.png
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\Content\Ent 200.png
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\Content\Ground.png
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\Content\Main Character200.png
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\Content\MainMenu.png
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\Content\PauseMenu.png
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\Content\Arial14.xnb
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\Project Forest.exe
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\Project Forest.pdb
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\MonoGame.Framework.dll
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.MediaFoundation.dll
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.dll
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.XAudio2.dll
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct3D11.dll
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.DXGI.dll
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct2D1.dll
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.XInput.dll
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.RawInput.dll
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct3D9.dll
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\MonoGame.Framework.xml
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.MediaFoundation.xml
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.xml
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.XAudio2.xml
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct3D11.xml
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.DXGI.xml
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct2D1.xml
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.XInput.xml
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.RawInput.xml
+C:\Users\James\Desktop\Project-Forest\Project Forest\bin\Windows\Debug\SharpDX.Direct3D9.xml
