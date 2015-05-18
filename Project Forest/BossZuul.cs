@@ -32,12 +32,11 @@ namespace Project_Forest
         {
             x = ix;
             y = iy;
-            g = new GameTime();
         }
 
         public bool DuelZuul()
         {
-
+            return true;
         }
     }
 }

@@ -293,3 +293,5 @@ C:\Users\Cyber Commander\Documents\GitHub\Project-Forest\Project Forest\bin\Wind
 C:\Users\Cyber Commander\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Content\Linkin Park - In The End.mp3
 C:\Users\Cyber Commander\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Content\OpeningSummary.png
 C:\Users\Cyber Commander\Documents\GitHub\Project-Forest\Project Forest\bin\Windows\Debug\Content\TerrariaMusic.xgs
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\Content\Linkin Park - In The End.mp3
+E:\School\Freshman\Second Semester\Game Design and Developement II\Project-Forest\Project Forest\bin\Windows\Debug\Content\OpeningSummary.png
